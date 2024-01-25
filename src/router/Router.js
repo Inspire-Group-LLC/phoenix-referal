@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Route,
   Routes,
@@ -6,21 +7,21 @@ import {
 } from "react-router-dom";
 import { APP_ROUTES } from "./Route.js";
 import Welcome from "../components/Welcome/Welcome.js";
-import Registration  from "../components/Registration/Registration.js";
-import Login  from "../components/Login/Login.js";
-import Main  from "../components/Main/Main.js";
+import Registration from "../components/Registration/Registration";
+import Login from "../components/Login/Login";
+import Main from "../components/Main/Main";
 
-<Navigate to="/" />
-
-export default function Router(){
+function Router() {
   return (
     <HashRouter>
       <Routes>
-        <Route path={APP_ROUTES.WELCOME} element={<Welcome />} />
+        <Route path="/" element={<Navigate to={APP_ROUTES.REGISTRATION} />} />
         <Route path={APP_ROUTES.REGISTRATION} element={<Registration />} />
         <Route path={APP_ROUTES.LOGIN} element={<Login />} />
         <Route path={APP_ROUTES.MAIN} element={<Main />} />
       </Routes>
     </HashRouter>
   );
-};
+}
+
+export default Router;
