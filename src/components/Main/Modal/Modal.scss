@@ -1,0 +1,30 @@
+@import './../../../variables.scss';
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    background:rgba(217, 217, 217, 0.5);
+    
+}
+
+.modal-content {
+    padding: 110px 103px;
+    background: $secondary-color;
+    border-radius: 16px;
+    max-width: fit-content;
+    h2{
+        margin-bottom: 63px;
+    }
+}
+
+.modal-active {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}

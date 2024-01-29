@@ -1,5 +1,5 @@
-import React from 'react';
-import './Registration.scss';
+import React from "react";
+import "./Registration.scss";
 import FormRegistration from "./FormRegistration.js";
 
 function Registration() {

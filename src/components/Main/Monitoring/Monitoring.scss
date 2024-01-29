@@ -1,0 +1,44 @@
+.monitoring {
+  padding: 24px 30px;
+  background-color: #181b3a; /* Replace with your actual background color */
+  border-radius: 10px;
+  max-width: 100%;
+
+  h2 {
+    margin-bottom: 21px;
+    color: #ffffff; /* Replace with your actual text color */
+  }
+
+  .monitoring-table {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    width: 100%;
+
+    .monitoring-header {
+      border: 1px solid #ffffff;
+      border-left: none;
+      font-size: 15px;
+    }
+    .phone-col {
+      color: #aeafbb;
+    }
+    p {
+      text-align: center; /* Center the text in cells */
+      color: #ffffff; /* Replace with your actual text color */
+      padding: 8px;
+      border: 1px solid #dddddd; /* Add border around cells */
+      font-size: 13px;
+      font-weight: 500;
+
+      &:nth-child(3n) {
+        border-right: none; /* Remove right border for the last element in each row */
+      }
+
+      &:nth-child(n + 4) {
+        border-bottom: none;
+        border-left: none;
+        border-top: none;
+      }
+    }
+  }
+}
