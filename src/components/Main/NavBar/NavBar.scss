@@ -1,0 +1,58 @@
+@import './../../../variables.scss';
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  width: 80px;
+  height: 100%;
+
+  text-align: center;
+}
+.logo-container {
+  margin-bottom: 31px;
+  height: 60px;
+
+  .logo {
+    height: 60px;
+
+    background-image: url("../../../logo.png");
+  }
+  p {
+    position: relative;
+    top: -13px;
+    left: 4px;
+    font-size: 14px;
+    font-family: "Montaga";
+    text-align: left;
+  }
+}   
+
+.colored-nav-bar {
+  height: 100vh;
+  background-color: $secondary-color;
+  display: flex;
+  border-radius: 10px;
+  padding: 45px 28px;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .nav-bar-icons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    // надо изменить значение когда добавлю иконки
+    margin-bottom: 200px;
+    .nav-bar-icon{
+      list-style-type: none;
+      margin-bottom: 34px;
+    }
+  }
+  .nav-btn {
+    margin-bottom: 34px;
+  }
+  .exit-btn {
+    color: #e53f52;
+    align-self: center;
+  }
+}
