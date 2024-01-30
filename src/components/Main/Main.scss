@@ -39,33 +39,36 @@ body {
 .lil-btns {
   width: 271px;
 }
-.links-comp{
-  width: 60%;;
+.lil-btns-mobile {
+  display: none;
+}
+.links-comp {
+  width: 60%;
 }
 
-.monitor-comp{
-  width: 40%;;
+.monitor-comp {
+  width: 40%;
 }
-.modal-text-inputs{
+.modal-text-inputs {
   align-items: center;
-  .modal-text-inputs-els{
+  .modal-text-inputs-els {
     align-items: center;
     font-size: 15px;
   }
-  .modal-text-inputs-el{
+  .modal-text-inputs-el {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 40px;
-    &:last-of-type{
+    &:last-of-type {
       margin-bottom: 0;
     }
-    input, select{
-      width:65%
+    input,
+    select {
+      width: 65%;
     }
-    
   }
-  .modal-createLink-btn{
+  .modal-createLink-btn {
     background-color: $bg-color;
     padding: 16px 126px;
     font-weight: 700;
@@ -75,5 +78,83 @@ body {
     border-radius: 58px;
     margin: 0 auto;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main {
+    padding: 24px 30px;
+  }
+
+  .row {
+    margin-bottom: 30px;
+    display: block;
+    > * {
+      margin: 0;
+    }
+    &:last-child {
+      display: none;
+    }
+    .mobile-col {
+      margin-bottom: 15px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+  .container {
+    display: inline;
+    .content {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+  .lil-btns {
+    display: none;
+  }
+  .lil-btns-mobile {
+    display: block;
+  }
+  .big-btns {
+    display: none;
+  }
+
+  // modal
+
+  .modal-text-inputs {
+    align-items: center;
+    .modal-text-inputs-els {
+      margin: 0 auto;
+      align-items: center;
+      font-size: 11px;
+    }
+    .modal-text-inputs-el {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      margin-bottom: 9px;
+      flex-direction: column;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+      input,
+      select {
+        width: 100%;
+      }
+      p{
+        margin-bottom: 6px;
+      }
+    }
+    .modal-createLink-btn {
+      background-color: $bg-color;
+      padding: 14px 57px;
+      font-weight: 700;
+      font-size: 13px;
+      color: $text-color;
+      border: none;
+      border-radius: 58px;
+      margin: 0 auto;
+      cursor: pointer;
+    }
   }
 }
