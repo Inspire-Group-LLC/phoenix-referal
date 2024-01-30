@@ -1,4 +1,4 @@
-@import './../../../variables.scss';
+@import "./../../../variables.scss";
 .nav-bar {
   display: flex;
   flex-direction: column;
@@ -11,39 +11,30 @@
 }
 .logo-container {
   margin-bottom: 31px;
-  height: 60px;
 
   .logo {
     height: 60px;
 
     background-image: url("../../../logo.png");
   }
-  p {
-    position: relative;
-    top: -13px;
-    left: 4px;
-    font-size: 14px;
-    font-family: "Montaga";
-    text-align: left;
-  }
-}   
+}
 
 .colored-nav-bar {
-  height: 100vh;
+  height: 94vh;
   background-color: $secondary-color;
   display: flex;
   border-radius: 10px;
   padding: 45px 28px;
   flex-direction: column;
   justify-content: space-between;
+  align-content: space-between;
 
   .nav-bar-icons {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     // надо изменить значение когда добавлю иконки
-    margin-bottom: 200px;
-    .nav-bar-icon{
+    .nav-bar-icon {
       list-style-type: none;
       margin-bottom: 34px;
     }
@@ -54,5 +45,31 @@
   .exit-btn {
     color: #e53f52;
     align-self: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav-bar {
+    display: flex;
+  }
+  .colored-nav-bar {
+    display: none;
+  }
+  .logo-container {
+    margin-bottom: 26px;
+    .logo {
+      width: 40px;
+      height: 40px;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+    p {
+      position: relative;
+      top: -13px;
+      font-size: 6px;
+      font-family: "Montaga";
+      text-align: left;
+      left: 6px;
+    }
   }
 }

@@ -9,7 +9,7 @@ const Statistics = () => {
                 <h2>Статистика</h2>
                 {/* donut chart */}
                 <div className="stats-body">
-                    <div style={{ width: '210px', height: '210px' }}>
+                    <div className="donut-chart" >
                         <DonutChart></DonutChart>
 
                     </div>
