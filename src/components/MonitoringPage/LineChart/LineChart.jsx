@@ -2,41 +2,43 @@ import React, { useEffect, useRef } from "react";
 import { Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto'; // Use 'chart.js/auto' for the latest version
 
-const LineChart = () => {
-    const options = {
-        plugins: {
-          legend: {
-            display: false,
-          },
+const LineChart = ( visible ) => {
+
+
+  const options = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100,
+        ticks: {
+          callback: (value) => `${value}%`,
+          color: 'white',
+          font: {
+            size: '10px',
+            family: 'Montserrat',
+            weight: 500
+          }
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 100,
-            ticks: {
-              callback: (value) => `${value}%`,
-              color: 'white',
-              font: {
-                size: '10px',
-                family: 'Montserrat',
-                weight: 500
-              }
-            },
-          },
-          x: {
-            type: 'category', // Specify 'category' for the x-axis
-            ticks: {
-              color: 'white',
-              font: {
-                size: '10px',
-                family: 'Montserrat',
-                weight: 500
-              }
-            },
-          },
+      },
+      x: {
+        type: 'category', // Specify 'category' for the x-axis
+        ticks: {
+          color: 'white',
+          font: {
+            size: '10px',
+            family: 'Montserrat',
+            weight: 500
+          }
         },
-      };
-      
+      },
+    },
+  };
+
 
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
@@ -78,7 +80,7 @@ const LineChart = () => {
           },
         ],
       },
-      options: 
+      options:
         options
       ,
     });
@@ -89,9 +91,16 @@ const LineChart = () => {
         chartInstance.current.destroy();
       }
     };
-  }, []); 
+  }, []);
 
-  return <canvas ref={chartRef} height='100%' width='100%' />;
+  return(
+    <>
+    {console.log(visible)}
+     <canvas ref={chartRef} height='40vh' width='100%' />
+ 
+     </>
+  )
+
 };
 
 export default LineChart;
