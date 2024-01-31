@@ -1,11 +1,41 @@
-@import './../../variables.scss';
+@import "./../../variables.scss";
 
-
-.references{
+.references {
   padding: 38px 44px;
-  .content{
+  .content {
     padding: 35px 70px;
     background-color: $secondary-color;
+    border-radius: 10px;
   }
+  h2{
+    font-size: 36px;
+    font-family: Montserrat;
+    font-weight: 500;
+}
 }
 
+.ref-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 0.5fr;
+  width: 100%;
+  font-family: montserrat;
+  margin-top: 19px;
+  .ref-header {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 38px;
+  }
+  .ref-col {
+    margin-bottom: 21px;
+    align-self: center;
+    &:not(:first-child):nth-child(4n-3) {
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+  .del-btn button{
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
