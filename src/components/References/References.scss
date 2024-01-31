@@ -7,11 +7,11 @@
     background-color: $secondary-color;
     border-radius: 10px;
   }
-  h2{
+  h2 {
     font-size: 36px;
     font-family: Montserrat;
     font-weight: 500;
-}
+  }
 }
 
 .ref-table {
@@ -33,9 +33,56 @@
       font-weight: 500;
     }
   }
-  .del-btn button{
+  .del-btn button {
     border: 0;
     background-color: transparent;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .references {
+    padding: 12px;
+    .content {
+      padding: 12px 9px;
+      background-color: $secondary-color;
+      border-radius: 10px;
+    }
+    h2 {
+      display: none;
+    }
+  }
+}
+
+.ref-table{
+  overflow-x: auto;
+}
+.ref-table {
+  margin-top: 0;
+  .ref-header {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0 10px 0 0;
+    margin-bottom: 18px;
+  }
+
+  .ref-col {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    margin-bottom: 11px;
+    align-self: center;
+    width: 150px;
+    button svg{
+      width: 15px;
+      height: 15px;
+    }
+    &:not(:first-child):nth-child(4n-3) {
+      font-size: 12px !important;
+    font-weight: 500 !important;
+    width: 150px;
+    }
+    &:not(:first-child):nth-child(4n){
+      width: fit-content;
+    }
   }
 }

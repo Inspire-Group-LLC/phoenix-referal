@@ -38,6 +38,17 @@ body {
 }
 .lil-btns {
   width: 271px;
+  height: 100px;
+  display: flex;
+  align-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
+  button {
+    padding: 25px 20px;
+  }
+  button:first-child {
+    margin-bottom: 26px;
+  }
 }
 .lil-btns-mobile {
   display: none;
@@ -97,7 +108,7 @@ body {
     }
     .mobile-col {
       margin-bottom: 15px;
-      &:last-child{
+      &:last-child {
         margin-bottom: 0;
       }
     }
@@ -141,7 +152,7 @@ body {
       select {
         width: 100%;
       }
-      p{
+      p {
         margin-bottom: 6px;
       }
     }
