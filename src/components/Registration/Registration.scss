@@ -1,5 +1,230 @@
-*{
-    margin: 0;
-    padding: 0 ;
-    box-sizing: border-box;
+.registrationPage {
+  position: relative;
+  background: #090d28;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .logoRegistration {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: 30px;
+    top: 30px;
+  }
+
+  .modalWrapper {
+    background-color: white;
+    padding: 20px 50px 30px 50px;
+    border-radius: 10px;
+
+    .headerComponents {
+      margin-bottom: 20px;
+
+      h1 {
+        color: black;
+        font-family: "Montserrat";
+        font-size: 35px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin-bottom: 20px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .thirdPartyRegWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .thirdPartyRegElement {
+          cursor: pointer;
+          margin-left: 10px;
+          margin-right: 10px;
+          min-width: 110px;
+          padding: 0 7px;
+          height: 33px;
+          background: #090d28;
+          border: 1px solid #c1030a;
+          border-radius: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+          }
+
+          p {
+            margin-left: 3px;
+            color: white;
+            font-family: Montserrat;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    .formWrapper {
+      width: 100%;
+      max-width: 470px;
+
+      .inputElement {
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 20px;
+
+        input {
+          width: 100%;
+          border: 1px solid #b1b1b1;
+          border-radius: 10px;
+          height: 40px;
+          padding: 25px;
+          
+          color: #000000;
+          font-family: Montserrat;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+      }
+
+      .agePhoneNumber {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .inputElement:first-child {
+          width: 60%;
+          margin-right: 10px;
+        }
+      }
+
+      .genderWrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+        padding: 25px;
+        margin-bottom: 20px;
+        border: 1px solid #b1b1b1;
+        border-radius: 10px;
+
+        p {
+          color: #777373;
+          font-family: Montserrat;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+
+        .radioWrapper {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 45%;
+
+          .genderItem {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            p {
+              margin-right: 10px;
+            }
+
+            input[type="checkbox"] {
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              border: 1px solid #000;
+              background-color: transparent;
+              appearance: none;
+              outline: none;
+            }
+
+            input[type="checkbox"]:checked {
+              background-color: #000;
+            }
+          }
+        }
+      }
+
+      .rememberPass {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 0 25px;
+
+        .passItem{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          &:last-child:hover{
+            opacity: 0.5;
+          }
+        }
+
+        input {
+          width: 20px;
+          height: 20px;
+          border-radius: 10px;
+          border: 1px solid #000;
+          cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+          accent-color: transparent;
+        }
+
+        label {
+          color: #000;
+          font-family: Montserrat;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+          margin-left: 10px;
+          cursor: pointer;
+        }
+      }
+
+      .sendDataWrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .sendData {
+          padding: 12px 25px;
+          text-align: center;
+          border-radius: 10px;
+          background: #1a1a1a;
+          color: #fff;
+          font-family: "Montserrat";
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          border: none;
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
 }

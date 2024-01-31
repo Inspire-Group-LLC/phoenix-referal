@@ -1,6 +1,6 @@
 import { Form } from "react-router-dom";
 import ThirdPartyReg from "./ThirdPartyReg";
-import Input from "./Input";
+import FromInput from "./FormInput";
 import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../router/Route";
@@ -19,8 +19,8 @@ function FormLogin() {
         </div> 
       </div>
       <div className="formWrapper">
-        <Input type="email" placeholder="E-mail" id="email" name="email" />
-        <Input type="password" placeholder="Пароль" id="pass" name="pass" />
+        <FromInput type="email" placeholder="E-mail" id="email" name="email" />
+        <FromInput type="password" placeholder="Пароль" id="pass" name="pass" />
         <div className="rememberPass">
           <div className="passItem">
             <input id="rememberPass" type="checkbox" />
