@@ -7,7 +7,6 @@ const NavBar = () => {
       <div className="nav-bar">
         <div className="logo-container">
           <div className="logo"></div>
-          <p>PHOENIX</p>
         </div>
         <div className="colored-nav-bar">
           <ul className="nav-bar-icons">

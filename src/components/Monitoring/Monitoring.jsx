@@ -1,6 +1,6 @@
 import React from "react";
 import './Monitoring.scss'
-import './../Main.scss';
+import '../Main/Main';
 const Monitoring = () => {
 
     const data = [{
