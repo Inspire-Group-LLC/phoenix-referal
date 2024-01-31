@@ -15,7 +15,7 @@ function Router() {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<Navigate to={APP_ROUTES.REGISTRATION} />} />
+        <Route path="/" element={<Navigate to={APP_ROUTES.LOGIN} />} />
         <Route path={APP_ROUTES.REGISTRATION} element={<Registration />} />
         <Route path={APP_ROUTES.LOGIN} element={<Login />} />
         <Route path={APP_ROUTES.MAIN} element={<Main />} />

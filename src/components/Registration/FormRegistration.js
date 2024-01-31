@@ -1,6 +1,6 @@
 import { Form } from "react-router-dom";
 import ThirdPartyReg from "./ThirdPartyReg";
-import Input from "./Input";
+import FromInput from "./FormInput";
 import React, { useState } from 'react';
 import "./Registration.scss";
 import { useNavigate } from "react-router-dom";
@@ -14,10 +14,10 @@ function FormRegistration() {
         <h1>Регистрация</h1>
       </div>
       <div className="formWrapper">
-        <Input type="text" placeholder="Ф.И.О." id="name" name="name" />
+        <FromInput type="text" placeholder="Ф.И.О." id="name" name="name" />
         <div className="agePhoneNumber">
-          <Input type="date" placeholder="Возраст" id="age" name="age" />
-          <Input
+          <FromInput type="date" placeholder="Возраст" id="age" name="age" />
+          <FromInput
             type="tel"
             placeholder="+998 (__) ___ - __ - __ "
             value="+998"
@@ -38,9 +38,9 @@ function FormRegistration() {
             </div>
           </div>
         </div>
-        <Input type="text" placeholder="Город" id="city" name="city" />
-        <Input type="email" placeholder="E-mail" id="email" name="email" />
-        <Input type="password" placeholder="Пароль" id="pass" name="pass" />
+        <FromInput type="text" placeholder="Город" id="city" name="city" />
+        <FromInput type="email" placeholder="E-mail" id="email" name="email" />
+        <FromInput type="password" placeholder="Пароль" id="pass" name="pass" />
         <div className="rememberPass">
           <div className="passItem">
             <input id="rememberPass" type="checkbox" />
