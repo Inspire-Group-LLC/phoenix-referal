@@ -5,7 +5,7 @@
   align-content: center;
   justify-content: center;
   width: 80px;
-  height: 100%;
+  height: 100vh;
 
   text-align: center;
 }
@@ -20,7 +20,7 @@
 }
 
 .colored-nav-bar {
-  height: 94vh;
+  height: 100%;
   background-color: $secondary-color;
   display: flex;
   border-radius: 10px;

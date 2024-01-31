@@ -11,6 +11,7 @@ import Registration from "../components/Registration/Registration";
 import Login from "../components/Login/Login";
 import Main from "../components/Main/Main";
 import References from "../components/References/References.jsx";
+import MonitoringPage from "../components/MonitoringPage/MonitoringPage.jsx";
 function Router() {
   return (
     <HashRouter>
@@ -20,6 +21,7 @@ function Router() {
         <Route path={APP_ROUTES.LOGIN} element={<Login />} />
         <Route path={APP_ROUTES.MAIN} element={<Main />} />
         <Route path={APP_ROUTES.REFERENCES} element={<References />} />
+        <Route path={APP_ROUTES.MONITORING} element={<MonitoringPage />} />
       </Routes>
     </HashRouter>
   );

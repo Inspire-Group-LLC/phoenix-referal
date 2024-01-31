@@ -1,11 +1,14 @@
 import React from "react";
-import "./Input.scss";
+import './Input.scss'
+
 const Input = React.forwardRef((props, ref) => {
-  return (
-    <>
-      <input ref={ref} className={props.className} {...props} />
-    </>
-  );
-});
+    const combinedClassName = ["input", props.className].filter(Boolean).join(" ");
+
+    return(
+        <>
+        <input ref={ref} className={combinedClassName} {...props} />
+        </>
+    )
+})
 
 export default Input;

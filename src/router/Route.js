@@ -4,4 +4,5 @@ export const APP_ROUTES = {
   LOGIN: `/login`,
   MAIN: `/main`,
   REFERENCES: '/references',
+  MONITORING: '/monitoring',
 };
