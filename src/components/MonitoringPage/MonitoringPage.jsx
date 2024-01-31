@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NavBar from "../Main/NavBar/NavBar";
+import NavBar from "../NavBar/NavBar";
 import './MonitoringPage.scss';
 import LineChart from "./LineChart/LineChart";
 const MonitoringPage = () => {

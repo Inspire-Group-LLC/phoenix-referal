@@ -1,4 +1,4 @@
-@import "./../../../variables.scss";
+@import "./../../variables.scss";
 .nav-bar {
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
   .logo {
     height: 60px;
 
-    background-image: url("../../../logo.png");
+    background-image: url("../../images/logo.svg");
   }
 }
 

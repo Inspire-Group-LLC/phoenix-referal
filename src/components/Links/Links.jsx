@@ -2,7 +2,7 @@
 
 import React from "react";
 import './Links.scss';
-import CopyBtn from "../Main/CopyBtn/CopyBtnBtn";
+import CopyBtn from "../CopyBtn/CopyBtn";
 
 const Links = () => {
     const data = [

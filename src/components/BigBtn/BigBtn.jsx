@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../Button/Buttonutton";
+import Button from "../Button/Button";
 import "./BigBtn.scss";
 
 const BigBtn = ({ children, className, ...props }) => {

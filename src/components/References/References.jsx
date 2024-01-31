@@ -1,6 +1,6 @@
 import React from "react";
-import NavBar from "../Main/NavBar/NavBar";
-import CopyBtn from "../Main/CopyBtn/CopyBtn";
+import NavBar from "../NavBar/NavBar";
+import CopyBtn from "../CopyBtn/CopyBtn";
 import DeleteBtn from "./DeleteBtn/DeleteBtn";
 import './References.scss';
 const References = () => {
