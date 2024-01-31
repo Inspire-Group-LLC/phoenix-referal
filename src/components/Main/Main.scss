@@ -1,0 +1,160 @@
+@import "./../../variables.scss";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: $bg-color;
+  color: $text-color;
+}
+.main {
+  padding: 38px 44px;
+}
+.container {
+  display: flex;
+  .content {
+    margin-left: 28px;
+    width: 100%;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  > * {
+    margin: 0 16px;
+  }
+}
+//first-row
+.big-btns {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+}
+.big-btns:first-child {
+  margin-left: 32px;
+}
+.lil-btns {
+  width: 271px;
+}
+.lil-btns-mobile {
+  display: none;
+}
+.links-comp {
+  width: 60%;
+}
+
+.monitor-comp {
+  width: 40%;
+}
+.modal-text-inputs {
+  align-items: center;
+  .modal-text-inputs-els {
+    align-items: center;
+    font-size: 15px;
+  }
+  .modal-text-inputs-el {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    input,
+    select {
+      width: 65%;
+    }
+  }
+  .modal-createLink-btn {
+    background-color: $bg-color;
+    padding: 16px 126px;
+    font-weight: 700;
+    font-size: 13px;
+    color: $text-color;
+    border: none;
+    border-radius: 58px;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main {
+    padding: 24px 30px;
+  }
+
+  .row {
+    margin-bottom: 30px;
+    display: block;
+    > * {
+      margin: 0;
+    }
+    &:last-child {
+      display: none;
+    }
+    .mobile-col {
+      margin-bottom: 15px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+  .container {
+    display: inline;
+    .content {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+  .lil-btns {
+    display: none;
+  }
+  .lil-btns-mobile {
+    display: block;
+  }
+  .big-btns {
+    display: none;
+  }
+
+  // modal
+
+  .modal-text-inputs {
+    align-items: center;
+    .modal-text-inputs-els {
+      margin: 0 auto;
+      align-items: center;
+      font-size: 11px;
+    }
+    .modal-text-inputs-el {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      margin-bottom: 9px;
+      flex-direction: column;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+      input,
+      select {
+        width: 100%;
+      }
+      p{
+        margin-bottom: 6px;
+      }
+    }
+    .modal-createLink-btn {
+      background-color: $bg-color;
+      padding: 14px 57px;
+      font-weight: 700;
+      font-size: 13px;
+      color: $text-color;
+      border: none;
+      border-radius: 58px;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+  }
+}

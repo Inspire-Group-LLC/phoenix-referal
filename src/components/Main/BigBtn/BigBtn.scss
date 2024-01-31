@@ -1,0 +1,21 @@
+.big-btn{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-height: min-content;
+    padding: 25px 20px;
+    
+    p:nth-child(2){
+        margin-top: 17px;
+    }
+    p:last-child{
+        margin-top: 5px;
+        font-weight: 600;
+        font-size: 24px;
+    }
+}
+.big-btn:first-child{
+    margin-right: 32px ;
+
+}

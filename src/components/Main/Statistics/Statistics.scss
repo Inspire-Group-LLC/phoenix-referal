@@ -1,0 +1,96 @@
+@import "./../../../variables.scss";
+
+.stats {
+  padding: 24px;
+  background-color: $secondary-color;
+  border-radius: 10px;
+  width: fit-content;
+  height: fit-content;
+  .stats-body {
+    display: flex;
+    margin-top: 21px;
+  }
+  h2 {
+    font-size: 24px;
+    font-family: montserrat;
+
+  }
+}
+.donut-chart {
+  width: 210px;
+  height: 210px;
+}
+.stats-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 21px;
+  margin-left: 40px;
+  li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-family: montserrat;
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+  }
+  li::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  li:nth-child(1)::before {
+    background: #01d492;
+  }
+  li:nth-child(2)::before {
+    background: #e87309;
+  }
+  li:nth-child(3)::before {
+    background: #e60000;
+  }
+  li:nth-child(4)::before {
+    background: #000000;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .stats {
+    padding: 15px 24px;
+    background-color: $secondary-color;
+    border-radius: 10px;
+    width: 100%;
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+    }
+    .stats-body {
+      display: flex;
+      margin-top: 15px;
+    }
+  }
+
+  .donut-chart {
+    width: 100px;
+    height: 100px;
+  }
+  .stats-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    margin-left: 26px;
+    li {
+      font-size: 10px;
+    }
+    li::before {
+      width: 10px;
+      height: 10px;
+    }
+  }
+}
