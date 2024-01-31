@@ -1,10 +1,9 @@
-import { Form } from "react-router-dom";
-import ThirdPartyReg from "./ThirdPartyReg";
 import FromInput from "./FormInput";
 import React, { useState } from 'react';
 import "./Registration.scss";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../router/Route";
+
 function FormRegistration() {
   const [checked, setChecked] = useState(0);
   const navigation = useNavigate();

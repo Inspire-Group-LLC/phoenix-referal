@@ -1,4 +1,3 @@
-import { Form } from "react-router-dom";
 import ThirdPartyReg from "./ThirdPartyReg";
 import FromInput from "./FormInput";
 import "./Login.scss";
