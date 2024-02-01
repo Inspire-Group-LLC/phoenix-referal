@@ -6,26 +6,33 @@
   border-radius: 10px;
   width: fit-content;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   .stats-body {
     display: flex;
-    margin-top: 21px;
   }
+
   h2 {
     font-size: 24px;
     font-family: montserrat;
-
+    color: white;
+    margin-bottom: 20px;
   }
 }
+
 .donut-chart {
-  width: 210px;
-  height: 210px;
+  max-width: 200px;
+  height: 100%;
 }
+
 .stats-list {
   list-style: none;
   padding: 0;
-  margin-top: 21px;
-  margin-left: 40px;
+  padding-top: 21px;
+  margin: 0 35px 0 65px;
+
   li {
     position: relative;
     padding-left: 25px;
@@ -36,6 +43,7 @@
     font-size: 16px;
     color: #fff;
   }
+
   li::before {
     content: "";
     position: absolute;
@@ -47,16 +55,20 @@
     border-radius: 50%;
     margin-right: 10px;
   }
-  li:nth-child(1)::before {
+
+  li:nth-child(2)::before {
     background: #01d492;
   }
-  li:nth-child(2)::before {
+
+  li:nth-child(3)::before {
     background: #e87309;
   }
-  li:nth-child(3)::before {
+
+  li:nth-child(4)::before {
     background: #e60000;
   }
-  li:nth-child(4)::before {
+
+  li:nth-child(5)::before {
     background: #000000;
   }
 }
@@ -67,10 +79,12 @@
     background-color: $secondary-color;
     border-radius: 10px;
     width: 100%;
+
     h2 {
       font-size: 20px;
       font-weight: 500;
     }
+
     .stats-body {
       display: flex;
       margin-top: 15px;
@@ -81,14 +95,17 @@
     width: 100px;
     height: 100px;
   }
+
   .stats-list {
     list-style: none;
     padding: 0;
     margin-top: 0;
     margin-left: 26px;
+
     li {
       font-size: 10px;
     }
+
     li::before {
       width: 10px;
       height: 10px;
