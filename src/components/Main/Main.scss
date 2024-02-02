@@ -8,7 +8,7 @@
     .menuWrapper {
         width: 80px;
         height: 100%;
-        margin-right: 30px;
+        margin-right: 20px;
 
         .logoWrapper {
             width: 100%;
@@ -22,9 +22,10 @@
         }
 
         .menu {
-            margin-top: 30px;
+            // margin-top: 30px;
             width: 100%;
-            height: calc(100% - 50px);
+            // height: calc(100% - 50px);
+            height: 100%;
             background: rgba(24, 27, 58, 1);
             border-radius: 10px;
             padding: 30px 0;
@@ -154,7 +155,7 @@
                             width: 25%;
                         }
 
-                        .refFunctions{
+                        .refFunctions {
                             justify-content: flex-end !important;
                         }
                     }
@@ -194,6 +195,23 @@
                     line-height: 29px;
                     letter-spacing: 0em;
                     text-align: left;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    span {
+                        font-size: 14px;
+                        width: 25px;
+                        height: 25px;
+                        margin-left: 10px;
+                        color: rgb(255, 187, 0);
+                        border: 2px solid rgb(255, 187, 0);
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding-right: 2px;
+                    }
                 }
 
                 p {

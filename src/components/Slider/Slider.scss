@@ -2,40 +2,45 @@
 
 .swiper {
   width: 100%;
-  max-width: 850px;
-  height: 100%;
+  height: calc(100% - 50px);
   min-height: auto;
   background-color: darkgrey;
   color: #fff;
   border-radius: 10px 10px 0 0;
 
-  .swip-slide {
-    padding: 24px 50px;
-    font-family: "Montserrat";
-    max-height: 203px;
+  .swiper-slide{
+    width: 100% !important;
     height: 100%;
+  }
+
+  .swip-slide {
+    padding: 24px 30px;
+    font-family: "Montserrat";
+    height: 100%;
+    width: 100%;
+    background-size: cover;
 
     h1 {
       font-size: 32px;
-      margin-bottom: 2px;
+      margin-bottom: 10px;
     }
 
     h3 {
       font-size: 20px;
-      margin-bottom: 6px;
+      margin-bottom:10px;
     }
 
     p {
-      font-size: 12.63px;
+      font-size: 14px;
     }
   }
 }
 
 .slider {
   background-color: darkgray;
-  width: 100%;
+  width: 69%;
   border-radius: 15px;
-  margin-left: 30px;
+  // margin-left: 30px;
   height: 100%;
 }
 
@@ -43,12 +48,11 @@
   background-color: $secondary-color;
   position: relative;
   bottom: 0;
-  transform: translateY(-99%);
   z-index: 5;
   padding: 15px 0;
   display: flex;
   justify-content: space-between;
-  // border-radius: 0 0 15px 15px;
+  border-radius: 0 0 10px 10px;
 
   .nav-btn {
     border: 0;
@@ -108,7 +112,8 @@
     .swip-slide {
       padding: 20px 24px;
       font-family: "Montserrat";
-      height: max-content;
+      height: 100%;
+      width: 100%;
 
       h1 {
         font-size: 16px;

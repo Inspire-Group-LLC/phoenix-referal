@@ -4,9 +4,8 @@ import React from "react";
 
 Chart.register(ArcElement);
 function calculatePercentage(array) {
-  const targetValue = array[array.length - 1];
-  const count = array.filter((value) => value === targetValue).length;
-  const percentage = Math.round((count / array.length) * 100);
+  const total = array.reduce((acc, value) => acc + value, 0);
+  const percentage = Math.round((array[3] / total) * 100);
   return percentage;
 }
 
@@ -15,7 +14,7 @@ const DonutChart = () => {
     labels: [],
     datasets: [
       {
-        data: [3, 6, 9, 10],
+        data: [2, 4, 6, 5],
         backgroundColor: ["#000000", "#E60000", "#E87309", "#01d492"],
         borderColor: ["#000000", "#E60000", "#E87309", "#01d492"],
       },

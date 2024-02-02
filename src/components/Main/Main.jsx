@@ -14,12 +14,18 @@ import wasteIcon from "../../images/wasteIcon.svg";
 
 function Main() {
   const [isOpenReferrals, setIsOpenReferrals] = useState(false);
+
+  const logoutSystem = () => {
+    localStorage.removeItem("@token");
+    window.location.reload();
+  };
+
   return (
     <div className="MainPage">
       <div className="menuWrapper">
-        <div className="logoWrapper">
+        {/* <div className="logoWrapper">
           <img src={logo} className="logo" alt="logo" />
-        </div>
+        </div> */}
         <div className="menu">
           <div className="menuHeader">
             <div className="menuItem">
@@ -34,7 +40,7 @@ function Main() {
           </div>
           <div className="logoutWrapper">
             <div className="menuItem">
-              <img src={logout} alt="logout" />
+              <img src={logout} alt="logout" onClick={logoutSystem} />
             </div>
           </div>
         </div>
@@ -63,6 +69,8 @@ function Main() {
                 <div className="refCategory">Категории</div>
                 <div></div>
               </div>
+
+
               <div className="referenceItem">
                 <div className="refName">Yfpdfyb</div>
                 <div className="refUrl">https://сайт.уз</div>
@@ -71,86 +79,8 @@ function Main() {
                   <img src={wasteIcon} alt="wasteIcon" />
                 </div>
               </div>
-              <div className="referenceItem">
-                <div className="refName">Yfpdfyb</div>
-                <div className="refUrl">https://сайт.уз</div>
-                <div className="refCategory">https://сайт.уз</div>
-                <div className="refFunctions">
-                  <img src={wasteIcon} alt="wasteIcon" />
-                </div>
-              </div>
-              <div className="referenceItem">
-                <div className="refName">Yfpdfyb</div>
-                <div className="refUrl">https://сайт.уз</div>
-                <div className="refCategory">https://сайт.уз</div>
-                <div className="refFunctions">
-                  <img src={wasteIcon} alt="wasteIcon" />
-                </div>
-              </div>
-              <div className="referenceItem">
-                <div className="refName">Yfpdfyb</div>
-                <div className="refUrl">https://сайт.уз</div>
-                <div className="refCategory">https://сайт.уз</div>
-                <div className="refFunctions">
-                  <img src={wasteIcon} alt="wasteIcon" />
-                </div>
-              </div>
-              <div className="referenceItem">
-                <div className="refName">Yfpdfyb</div>
-                <div className="refUrl">https://сайт.уз</div>
-                <div className="refCategory">https://сайт.уз</div>
-                <div className="refFunctions">
-                  <img src={wasteIcon} alt="wasteIcon" />
-                </div>
-              </div>
-              <div className="referenceItem">
-                <div className="refName">Yfpdfyb</div>
-                <div className="refUrl">https://сайт.уз</div>
-                <div className="refCategory">https://сайт.уз</div>
-                <div className="refFunctions">
-                  <img src={wasteIcon} alt="wasteIcon" />
-                </div>
-              </div>
-              <div className="referenceItem">
-                <div className="refName">Yfpdfyb</div>
-                <div className="refUrl">https://сайт.уз</div>
-                <div className="refCategory">https://сайт.уз</div>
-                <div className="refFunctions">
-                  <img src={wasteIcon} alt="wasteIcon" />
-                </div>
-              </div>
-              <div className="referenceItem">
-                <div className="refName">Yfpdfyb</div>
-                <div className="refUrl">https://сайт.уз</div>
-                <div className="refCategory">https://сайт.уз</div>
-                <div className="refFunctions">
-                  <img src={wasteIcon} alt="wasteIcon" />
-                </div>
-              </div>
-              <div className="referenceItem">
-                <div className="refName">Yfpdfyb</div>
-                <div className="refUrl">https://сайт.уз</div>
-                <div className="refCategory">https://сайт.уз</div>
-                <div className="refFunctions">
-                  <img src={wasteIcon} alt="wasteIcon" />
-                </div>
-              </div>
-              <div className="referenceItem">
-                <div className="refName">Yfpdfyb</div>
-                <div className="refUrl">https://сайт.уз</div>
-                <div className="refCategory">https://сайт.уз</div>
-                <div className="refFunctions">
-                  <img src={wasteIcon} alt="wasteIcon" />
-                </div>
-              </div>
-              <div className="referenceItem">
-                <div className="refName">Yfpdfyb</div>
-                <div className="refUrl">https://сайт.уз</div>
-                <div className="refCategory">https://сайт.уз</div>
-                <div className="refFunctions">
-                  <img src={wasteIcon} alt="wasteIcon" />
-                </div>
-              </div>
+
+              
             </div>
           </div>
         </div>
@@ -159,7 +89,7 @@ function Main() {
             <div className="balanceHeader">
               <h2>Ваш баланс - 100.000</h2>
               <h2>
-                Ecoin - 760 <span className="ecoin"></span>
+                Ecoin - 760 <span className="ecoin">E</span>
               </h2>
             </div>
             <p>Курс (1.000 сум = 19 баллов)</p>
