@@ -8,10 +8,13 @@ import oneid from "../../images/oneid.svg";
 import faceid from "../../images/faceid.svg";
 import axios from "axios";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function FormLogin() {
   const [emailInput, setemailInput] = useState("");
   const [passInput, setpassInput] = useState("");
-  const url = "http://localhost:3000/auth/login";
+  const url = `${APP_ROUTES.URL}/auth/login`;
   const navigation = useNavigate();
 
   const handleLogin = async () => {
@@ -22,18 +25,23 @@ function FormLogin() {
       });
 
       const token = response.data.access_token;
+      const user_id = response.data.user_id;
+      const balance = response.data.balance;
 
       if (token) {
         localStorage.setItem("@token", token);
+        localStorage.setItem("user_id", user_id);
+        localStorage.setItem("balance", balance);
         navigation(APP_ROUTES.MAIN);
       }
     } catch (error) {
-      console.error("Ошибка входа", error);
+      toast.error("Не верный логин или пароль");
     }
   };
 
   return (
     <div className="modalWrapper">
+      <ToastContainer />
       <div className="headerComponents">
         <h1>Вход</h1>
         <div className="thirdPartyRegWrapper">

@@ -218,8 +218,64 @@
           font-style: normal;
           font-weight: 500;
           line-height: normal;
+          &:hover {
+            opacity: 0.8;
+          }
         }
       }
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .loginPage{
+    height: 100%;
+    position: relative;
+
+    .logoLogin{
+      width: 60px;
+      height: 60px;
+      left: 50%;
+      top: 0px;
+      transform: translateX(-50%);
+    }
+
+    .modalWrapper{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      min-width: 300px;
+      padding: 20px;
+
+      .headerComponents{
+        h1{
+          font-size: 25px;
+          margin-bottom: 10px;
+        }
+      }
+      
+      .formWrapper{
+        .inputElement{
+          input{
+            padding: 20px;
+            font-size: 16px;
+          }
+        }
+      }
+
+      .rememberPass{
+        flex-direction: column;
+        .passItem{
+          margin-bottom: 10px;
+          &:last-child{
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+      

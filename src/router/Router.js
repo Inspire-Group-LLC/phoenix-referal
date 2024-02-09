@@ -1,11 +1,18 @@
 import React from "react";
-import { Route, Routes, Navigate, HashRouter, useLocation, } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  Navigate,
+  HashRouter,
+  useLocation,
+} from "react-router-dom";
 import { APP_ROUTES } from "./Route.js";
 import Registration from "../components/Registration/Registration";
 import Login from "../components/Login/Login";
 import Main from "../components/Main/Main";
+import MonitoringPage from "../components/Monitoring/MonitoringPage";
 
-function RequireAuth({ children }: any) {
+function RequireAuth({ children }) {
   const token = localStorage.getItem("@token");
   const isTokenAvailable = token != null && token != "";
 
@@ -31,6 +38,14 @@ function Router() {
           element={
             <RequireAuth>
               <Main />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={APP_ROUTES.MONITORING}
+          element={
+            <RequireAuth>
+              <MonitoringPage />
             </RequireAuth>
           }
         />

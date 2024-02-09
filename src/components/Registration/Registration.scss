@@ -228,3 +228,83 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .registrationPage{
+    height: auto;
+    position: relative;
+    padding-top: 60px;
+    padding-bottom: 20px;
+
+    .logoRegistration{
+      width: 60px;
+      height: 60px;
+      left: 50%;
+      top: 0px;
+      transform: translateX(-50%);
+    }
+
+    .modalWrapper{
+      width: 90%;
+      min-width: 300px;
+      padding: 20px;
+
+      .headerComponents{
+        margin-bottom: 15px;
+        h1{
+          font-size: 22px;
+          margin-bottom: 0;
+        }
+      }
+
+      input{
+        padding: 10px !important;
+        font-size: 16px !important;
+      }
+      
+      .formWrapper{
+        .inputElement{
+          margin-bottom: 15px;
+        }
+
+        .agePhoneNumber{
+          flex-direction: column;
+          & > div{
+            width: 100% !important;
+          }
+        }
+
+        .genderWrapper{
+          padding: 20px 10px;
+          margin-bottom: 15px;
+          &>p{
+            font-size: 16px;
+          }
+          .radioWrapper{
+            width: 60%;
+            .genderItem{
+              margin-left: 10px;
+              p{
+                font-size: 16px;
+              }
+            }
+          }
+        }
+      }
+
+      .rememberPass{
+        flex-direction: column;
+        .passItem{
+          margin-bottom: 10px;
+          &:last-child{
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .registrationPage .modalWrapper .formWrapper .agePhoneNumber .inputElement:first-child{
+    margin-right: 0;
+  }
+}

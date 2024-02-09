@@ -5,4 +5,5 @@ export const APP_ROUTES = {
   MAIN: `/main`,
   REFERENCES: '/references',
   MONITORING: '/monitoring',
+  URL: 'http://localhost:3000',
 };

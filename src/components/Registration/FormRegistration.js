@@ -9,7 +9,7 @@ function FormRegistration() {
   const [checked, setChecked] = useState(0);
   const navigation = useNavigate();
 
-  const url = "http://localhost:3000/auth/register";
+  const url = `${APP_ROUTES.URL}/auth/register`;
   const [nameInput, setnameInput] = useState("");
   const [emailInput, setemailInput] = useState("");
   const [phoneInput, setphoneInput] = useState("");
@@ -29,11 +29,15 @@ function FormRegistration() {
         age: +ageInput,
         city: cityInput,
       });
-      
+
       const token = response.data.access_token;
+      const user_id = response.data.user_id;
+      const balance = response.data.balance;
 
       if (token) {
         localStorage.setItem("@token", token);
+        localStorage.setItem("user_id", user_id);
+        localStorage.setItem("balance", balance);
         navigation(APP_ROUTES.MAIN);
       }
     } catch (error) {

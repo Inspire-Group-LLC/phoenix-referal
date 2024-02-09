@@ -8,7 +8,7 @@
   color: #fff;
   border-radius: 10px 10px 0 0;
 
-  .swiper-slide{
+  .swiper-slide {
     width: 100% !important;
     height: 100%;
   }
@@ -27,7 +27,7 @@
 
     h3 {
       font-size: 20px;
-      margin-bottom:10px;
+      margin-bottom: 10px;
     }
 
     p {
@@ -38,9 +38,8 @@
 
 .slider {
   background-color: darkgray;
-  width: 69%;
+  width: 70%;
   border-radius: 15px;
-  // margin-left: 30px;
   height: 100%;
 }
 
@@ -94,62 +93,4 @@
   display: flex;
   justify-content: center;
   align-self: center;
-}
-
-@media screen and (max-width: 600px) {
-  .swiper {
-    width: 100%;
-    max-width: 296px;
-    /* Set a maximum width if needed */
-    height: 100%;
-    max-height: 100%;
-    /* Set a maximum height if needed */
-    min-height: auto;
-    background-color: darkgrey;
-    color: #fff;
-    border-radius: 10px 10px 0 0;
-
-    .swip-slide {
-      padding: 20px 24px;
-      font-family: "Montserrat";
-      height: 100%;
-      width: 100%;
-
-      h1 {
-        font-size: 16px;
-        margin-bottom: 2px;
-      }
-
-      h3 {
-        font-size: 10px;
-        margin-bottom: 6px;
-      }
-
-      p {
-        font-size: 6.63px;
-      }
-    }
-  }
-
-  .nav-btns {
-    background-color: $secondary-color;
-    position: relative;
-    bottom: 21%;
-    padding: 9px 0;
-    display: flex;
-    justify-content: space-between;
-    border-radius: 0 0 10px 10px;
-
-    .nav-btn {
-      border: 0;
-      background-color: transparent;
-      padding: 0;
-      margin: 0;
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      position: relative;
-      margin: 0 20px;
-    }
-  }
 }

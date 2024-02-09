@@ -13,9 +13,8 @@ const Statistics = () => {
           <ul className="stats-list">
             <h2>Статистика</h2>
             <li>Успешно</li>
-            <li>Неопределенно</li>
+            <li>В ожидании</li>
             <li>Отказ</li>
-            <li>Треш</li>
           </ul>
         </div>
       </div>

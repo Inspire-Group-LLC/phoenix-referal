@@ -1,432 +1,1389 @@
 .MainPage {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+
+  .menuWrapper {
+    width: 80px;
+    height: 100%;
+    margin-right: 20px;
+
+    .logoWrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .menu {
+      width: 100%;
+      height: 100%;
+      background: rgba(24, 27, 58, 1);
+      border-radius: 10px;
+      padding: 30px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+      min-width: 74px;
+
+      .menuHeader {
+        .menuItem {
+          margin-bottom: 30px;
+        }
+      }
+
+      img {
+        cursor: pointer;
+        filter: brightness(1);
+
+        &:hover {
+          filter: brightness(0.4);
+        }
+      }
+
+    }
+  }
+
+  .body {
     width: 100%;
     height: 100%;
-    padding: 20px;
     display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    position: relative;
 
+    .closeIcon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
 
-    .menuWrapper {
-        width: 80px;
-        height: 100%;
-        margin-right: 20px;
+      &::after {
+        content: "";
+        width: 20px;
+        height: 3px;
+        background: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
 
-        .logoWrapper {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+      &::before {
+        content: "";
+        width: 20px;
+        height: 3px;
+        background: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
 
-            img {
-                width: 100%;
-            }
+    .refferenceCreateContainer {
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.918);
+      position: absolute;
+      z-index: 41;
+      top: 0;
+      left: 0;
+      border-radius: 8px;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .createReferenceWrapper {
+        width: 45%;
+        max-width: 600px;
+        min-width: 600px;
+        background: rgba(24, 27, 58, 1);
+        padding: 30px;
+        border-radius: 10px;
+
+        .createReferenceHeading {
+          width: 100%;
+
+          h2 {
+            font-family: "Montserrat";
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 0px;
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+          }
         }
 
-        .menu {
-            // margin-top: 30px;
+        .createReferenceForm {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+
+          .formItem {
             width: 100%;
-            // height: calc(100% - 50px);
-            height: 100%;
-            background: rgba(24, 27, 58, 1);
-            border-radius: 10px;
-            padding: 30px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-direction: column;
+            margin-bottom: 20px;
 
-            .menuHeader {
-                .menuItem {
-                    margin-bottom: 30px;
-                }
+            label {
+              color: white;
+              font-size: 16px;
+              font-family: "Montserrat";
             }
+
+            select,
+            input {
+              font-family: "Montserrat";
+              width: 65%;
+              padding: 8px 8px;
+              border-radius: 5px;
+              background: #e53f5200;
+              color: white;
+              font-size: 16px;
+              border: 1px solid white;
+              cursor: pointer;
+
+              option {
+                color: black;
+                font-weight: 500;
+                z-index: 999;
+              }
+
+            }
+
+            input::placeholder {
+              color: rgb(142, 142, 142);
+            }
+          }
+
+          .newRefButtonWrapper {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            button {
+              padding: 10px 50px;
+              background: #e53f5200;
+              border: 1px solid white;
+              border-radius: 5px;
+              color: white;
+              font-family: "Montserrat";
+              font-weight: 500;
+              font-size: 16px;
+              transition: 0.5s;
+              cursor: pointer;
+
+              &:hover {
+                background: #ffffff;
+                color: black;
+              }
+            }
+          }
         }
+      }
     }
 
-    .body {
+    .referencesContainer {
+      width: 100%;
+      height: 100%;
+      background: rgba(24, 27, 58, 1);
+      position: absolute;
+      z-index: 40;
+      top: 0;
+      left: 0;
+      border-radius: 8px;
+      padding: 20px 30px;
+
+      .allReferencesWrapper {
         width: 100%;
         height: 100%;
         display: flex;
-        justify-content: space-between;
         flex-direction: column;
-        position: relative;
 
-        .referencesContainer {
-            width: 100%;
-            height: 100%;
-            background: rgba(24, 27, 58, 1);
-            position: absolute;
-            z-index: 40;
-            top: 0;
-            left: 0;
-            border-radius: 8px;
-            padding: 20px 30px;
+        .referencesHeading {
+          margin-bottom: 30px;
 
-            .closeIcon {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                cursor: pointer;
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.2);
-
-                &::after {
-                    content: "";
-                    width: 20px;
-                    height: 3px;
-                    background: white;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%) rotate(45deg);
-                }
-
-                &::before {
-                    content: "";
-                    width: 20px;
-                    height: 3px;
-                    background: white;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%) rotate(-45deg);
-                }
-            }
-
-            .allReferencesWrapper {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-
-                .referencesHeading {
-                    margin-bottom: 30px;
-
-                    h2 {
-                        font-family: "Montserrat";
-                        font-size: 36px;
-                        font-weight: 500;
-                        line-height: 44px;
-                        letter-spacing: 0em;
-                        text-align: left;
-                        color: white;
-                    }
-                }
-
-                .references {
-                    width: 100%;
-                    height: 100%;
-                    overflow-y: scroll;
-
-                    &::-webkit-scrollbar {
-                        display: none;
-                    }
-
-                    .referenceHeadingRow {
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-bottom: 20px;
-
-                        div {
-                            color: white;
-                            font-size: 22px;
-                            font-family: "Montserrat";
-                            width: 25%;
-                        }
-                    }
-
-                    .referenceItem {
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-bottom: 20px;
-
-                        div {
-                            display: flex;
-                            justify-content: flex-start;
-                            align-items: center;
-                            color: white;
-                            font-size: 20px;
-                            font-family: "Montserrat";
-                            width: 25%;
-                        }
-
-                        .refFunctions {
-                            justify-content: flex-end !important;
-                        }
-                    }
-                }
-            }
+          h2 {
+            font-family: "Montserrat";
+            font-size: 36px;
+            font-weight: 500;
+            line-height: 44px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: white;
+          }
         }
 
-        .informationBtns {
+        .references {
+          width: 100%;
+          height: 100%;
+          overflow-y: scroll;
+          overflow-x: auto;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+          .referenceHeadingRow {
             width: 100%;
-            min-height: 155px;
-            height: 24%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 20px;
 
-            &>div:not(:last-child) {
-                margin-right: 20px;
+            div {
+              color: white;
+              font-size: 22px;
+              font-family: "Montserrat";
+              width: 25%;
+              margin-right: 20px;
             }
 
-            .balanceWrapper {
-                min-width: 340px;
-                width: 24%;
-                height: 100%;
-                border: 1px solid rgba(255, 255, 255, 1);
-                border-radius: 10px;
-                padding: 30px;
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-start;
-                flex-direction: column;
-                color: white;
-
-                h2 {
-                    font-family: "Montserrat";
-                    font-size: 24px;
-                    font-weight: 500;
-                    line-height: 29px;
-                    letter-spacing: 0em;
-                    text-align: left;
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-
-                    span {
-                        font-size: 14px;
-                        width: 25px;
-                        height: 25px;
-                        margin-left: 10px;
-                        color: rgb(255, 187, 0);
-                        border: 2px solid rgb(255, 187, 0);
-                        border-radius: 50%;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        padding-right: 2px;
-                    }
-                }
-
-                p {
-                    font-family: "Montserrat";
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 12px;
-                    letter-spacing: 0em;
-                    text-align: left;
-                }
+            div:first-child {
+              max-width: 200px;
+              min-width: 200px;
             }
 
-            .reference {
-                height: 100%;
-                width: 24%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-direction: column;
-
-                .refItem {
-                    padding: 0 30px;
-                    border-radius: 10px;
-                    background: linear-gradient(91.95deg, #F05F22 1.5%, #E53F52 53.97%, rgba(229, 63, 82, 0) 146.29%);
-                    height: 45%;
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    cursor: pointer;
-
-                    &:hover {
-                        background: #F05F22;
-                    }
-
-                    h3 {
-                        font-family: Montserrat;
-                        font-size: 20px;
-                        font-weight: 500;
-                        line-height: 24px;
-                        letter-spacing: 0em;
-                        text-align: left;
-                        color: rgba(255, 255, 255, 1);
-                    }
-
-                    img {
-                        width: 30px;
-                        height: 30px;
-                    }
-                }
+            .refUrl {
+              min-width: 250px;
             }
 
-            .bigRefItem {
-                height: 100%;
-                width: 24%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                background: linear-gradient(91.95deg, #F05F22 1.5%, #E53F52 53.97%, rgba(229, 63, 82, 0) 146.29%);
-                padding: 30px;
-                border-radius: 10px;
-                font-family: Montserrat;
-                font-size: 18px;
-                font-weight: 500;
+            .refDate,
+            .refCategory {
+              max-width: 150px;
+              min-width: 150px;
+            }
+
+            div:last-child {
+              max-width: 25px;
+              min-width: 25px;
+              margin-right: 0px;
+            }
+          }
+
+          .referenceItem {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+
+            div {
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              color: white;
+              font-size: 16px;
+              font-family: "Montserrat";
+              width: 25%;
+              margin-right: 20px;
+            }
+
+            div:first-child {
+              max-width: 200px;
+              min-width: 200px;
+            }
+
+            .refUrl {
+              min-width: 250px;
+            }
+
+            .refDate,
+            .refCategory {
+              max-width: 150px;
+              min-width: 150px;
+            }
+
+            div:last-child {
+              max-width: 25px;
+              min-width: 25px;
+              margin-right: 0px;
+            }
+
+            .refFunctions {
+              justify-content: flex-end !important;
+
+              img:hover {
+                filter: brightness(0.4);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .monitoringContainer {
+      width: 100%;
+      height: 100%;
+      background: rgba(24, 27, 58, 1);
+      position: absolute;
+      z-index: 40;
+      top: 0;
+      left: 0;
+      border-radius: 8px;
+      padding: 20px;
+
+      .monitoringWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        height: 100%;
+        width: 100%;
+
+        .closeIcon {
+          top: -10px;
+          right: -10px;
+        }
+
+        .monitoringChartWrapper {
+          width: 100%;
+          border-radius: 10px;
+          background: rgb(37, 41, 90);
+          transition: 1s;
+        }
+
+        .monitoringTableWrapper {
+          padding: 20px;
+          width: 100%;
+          border-radius: 10px;
+          background: rgb(37, 41, 90);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          transition: 1s;
+
+          .monitoringTableHeading {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 5%;
+            margin-bottom: 30px;
+
+            h3 {
+              font-family: "Montserrat";
+              font-size: 26px;
+              font-weight: 500;
+              line-height: 29px;
+              letter-spacing: 0em;
+              text-align: left;
+              color: white;
+            }
+
+            .hideMonitoring {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              p {
+                font-family: "Montserrat";
+                font-size: 16px;
+                font-weight: 400;
                 line-height: 24px;
                 letter-spacing: 0em;
                 text-align: left;
-                color: rgba(255, 255, 255, 1);
-                cursor: pointer;
+                color: white;
+              }
 
-                &:hover {
-                    background: #F05F22;
+              .upIcon {
+                position: relative;
+                width: 30px;
+                height: 30px;
+                margin-left: 10px;
+                transition: 1s;
+
+                &::before {
+                  content: "";
+                  position: absolute;
+                  top: 50%;
+                  left: 0%;
+                  transform: rotate(135deg) translateX(-3px) translateY(-50%);
+                  width: 15px;
+                  height: 2px;
+                  background: white;
                 }
 
-                img {
-                    width: 40px;
-                    height: 40px;
-                    margin-bottom: 15px;
+                &::after {
+                  content: "";
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: rotate(-135deg) translateX(3px) translateY(-50%);
+                  width: 15px;
+                  height: 2px;
+                  background: white;
                 }
+              }
             }
-        }
+          }
 
-        .statisticsWrapper {
-            width: 100%;
-            height: 39%;
-            // max-height: 255px;
+          .monitoring {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
-        }
+            height: 89%;
+            overflow: auto;
 
-        .referencesWrapper {
-            height: 30% !important;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-
-            .referencesDiv {
-                border-radius: 10px;
-                padding: 20px;
-                width: 50%;
-                height: 100% !important;
-                background: rgba(24, 27, 58, 1);
-
-                .referencesHeading {
-                    margin-bottom: 8px;
-
-                    h2 {
-                        font-family: "Montserrat";
-                        font-size: 24px;
-                        font-weight: 500;
-                        line-height: 29px;
-                        letter-spacing: 0em;
-                        text-align: left;
-                        color: white;
-                    }
-
-                }
-
-                .references {
-                    width: 100%;
-                    max-height: 80%;
-                    overflow-y: scroll;
-
-                    &::-webkit-scrollbar {
-                        display: none;
-                    }
-
-
-                    .referenceItem {
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        color: white;
-                        font-size: 16px;
-                        font-weight: 500;
-                        line-height: 19px;
-                        font-family: "Montserrat";
-                        margin-bottom: 8px;
-
-                        img {
-                            width: 24px;
-                            height: 24px;
-                            margin-left: 20px;
-                            cursor: pointer;
-                        }
-                    }
-                }
+            &::-webkit-scrollbar {
+              display: none;
             }
 
-            .monitoringDiv {
-                border-radius: 10px;
-                padding: 20px;
-                width: 49%;
-                height: 100% !important;
-                background: rgba(24, 27, 58, 1);
+            .monitoringHeadings {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding-bottom: 10px;
+              border-bottom: 1px white solid;
+              margin-bottom: 2px;
 
-                .monitoringHeading {
-                    margin-bottom: 8px;
+              div {
+                font-family: "Montserrat";
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 20px;
+                letter-spacing: 0em;
+                text-align: left;
+                color: white;
+                width: 20%;
+                display: flex;
+                justify-content: center;
 
-                    h2 {
-                        font-family: "Montserrat";
-                        font-size: 24px;
-                        font-weight: 500;
-                        line-height: 29px;
-                        letter-spacing: 0em;
-                        text-align: left;
-                        color: white;
-                        padding-left: 20px;
-                        margin-bottom: 10px;
-                    }
+                &:first-child {
+                  justify-content: flex-start;
+                  min-width: 240px;
                 }
 
-                .tableMonitoring {
-                    width: 100%;
-                    height: 80%;
-                    overflow-y: scroll;
-
-                    &::-webkit-scrollbar {
-                        display: none;
-                    }
-
-                    tr {
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        border-bottom: 1px white solid;
-
-                        &:first-child {
-                            border-top: 1px white solid;
-                        }
-
-                        td {
-                            width: 33%;
-                            display: flex;
-                            justify-content: flex-start;
-                            align-items: center;
-                            padding: 10px 0 10px 20px;
-                            color: white;
-                            font-size: 14px;
-                            font-weight: 400;
-                            font-family: "Montserrat";
-                            border-right: 1px solid white;
-
-                            &:last-child {
-                                border-right: none;
-                            }
-                        }
-                    }
+                &:nth-of-type(2) {
+                  min-width: 250px;
                 }
+
+                &:nth-of-type(3) {
+                  min-width: 150px;
+                }
+
+                &:nth-of-type(4) {
+                  min-width: 150px;
+                }
+
+                &:last-child {
+                  justify-content: flex-end;
+                  min-width: 150px;
+                }
+              }
             }
+
+            .monitoringItemsWrapper {
+              width: 100%;
+              // overflow: auto;
+
+              // &::-webkit-scrollbar {
+              //   display: none;
+              // }
+
+              .monitoringItems {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-top: 7px;
+
+                .monitoringItem {
+                  font-family: "Montserrat";
+                  font-size: 16px;
+                  font-weight: 400;
+                  letter-spacing: 0em;
+                  text-align: left;
+                  color: white;
+                  width: 33%;
+                  display: flex;
+                  align-items: center;
+                  width: 20%;
+                  justify-content: center;
+                  border-bottom: 1px white solid;
+                  padding-bottom: 7px;
+
+                  &:first-child {
+                    justify-content: flex-start;
+                    min-width: 240px;
+                  }
+
+                  &:nth-of-type(2) {
+                    min-width: 250px;
+                  }
+
+                  &:nth-of-type(3) {
+                    min-width: 150px;
+                  }
+
+                  &:nth-of-type(4) {
+                    min-width: 150px;
+                  }
+
+                  &:last-child {
+                    justify-content: flex-end;
+                    min-width: 150px;
+                  }
+                }
+              }
+            }
+          }
         }
+      }
     }
+
+    .informationBtns {
+      width: 100%;
+      min-height: 100px;
+      height: 18%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &>div:not(:last-child) {
+        margin-right: 20px;
+      }
+
+      .balanceWrapper {
+        min-width: 340px;
+        width: 24%;
+        height: 100%;
+        background: linear-gradient(139.53deg, #FF2C2C 12.43%, rgba(251, 152, 4, 0.796875) 24.55%, rgba(223, 255, 218, 0.23084) 45.29%, rgba(255, 255, 255, 0) 50.9%, rgba(255, 10, 127, 0.82) 75.08%, #780EFF 88.57%);
+        border-radius: 10px;
+        box-shadow: 16.10348129272461px -13.956351280212402px 19.700000762939453px 0px #FF00001F;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+
+        h2 {
+          font-family: "Montserrat";
+          font-size: 20px;
+          font-weight: 500;
+          line-height: 29px;
+          letter-spacing: 0em;
+          text-align: left;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+
+          span {
+            font-size: 14px;
+            width: 25px;
+            height: 25px;
+            margin-left: 10px;
+            color: rgb(255, 187, 0);
+            border: 2px solid rgb(255, 187, 0);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-right: 1px;
+          }
+        }
+
+        p {
+          font-family: "Montserrat";
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 12px;
+          letter-spacing: 0em;
+          text-align: left;
+        }
+
+        .balanceWrapperInfo {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 0 30px;
+          width: calc(100% - 4px);
+          height: calc(100% - 4px);
+          border-radius: 10px;
+          padding: 15px 20px 20px 20px;
+          background: #0E101C;
+        }
+      }
+
+      .reference {
+        height: 100%;
+        width: 24%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+
+        .refItem {
+          background: linear-gradient(139.53deg, #FF2C2C 12.43%, rgba(251, 152, 4, 0.796875) 24.55%, rgba(223, 255, 218, 0.23084) 45.29%, rgba(255, 255, 255, 0) 50.9%, rgba(255, 10, 127, 0.82) 75.08%, #780EFF 88.57%);
+          border-radius: 10px;
+          box-shadow: 16.10348129272461px -13.956351280212402px 19.700000762939453px 0px #FF00001F;
+          height: 45%;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          transition: 0.5s;
+
+          &:hover {
+            background: #6722f0;
+          }
+
+          h3 {
+            font-family: Montserrat;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 24px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: rgba(255, 255, 255, 1);
+          }
+
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
+
+        .refItemWrapper {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-direction: row;
+          padding: 0 30px;
+          width: calc(100% - 4px);
+          height: calc(100% - 4px);
+          border-radius: 10px;
+          background: #0E101C;
+        }
+      }
+
+      .bigRefItem {
+        height: 100%;
+        width: 24%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: linear-gradient(139.53deg, #FF2C2C 12.43%, rgba(251, 152, 4, 0.796875) 24.55%, rgba(223, 255, 218, 0.23084) 45.29%, rgba(255, 255, 255, 0) 50.9%, rgba(255, 10, 127, 0.82) 75.08%, #780EFF 88.57%);
+        border-radius: 10px;
+        box-shadow: 16.10348129272461px -13.956351280212402px 19.700000762939453px 0px #FF00001F;
+        font-family: Montserrat;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0em;
+        text-align: left;
+        color: rgba(255, 255, 255, 1);
+        cursor: pointer;
+        transition: 0.5s;
+
+        &:hover {
+          background: #6722f0;
+        }
+
+        img {
+          width: 40px;
+          height: 40px;
+          margin-bottom: 15px;
+        }
+
+        .bigRefItemWrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          padding: 30px;
+          width: calc(100% - 4px);
+          height: calc(100% - 4px);
+          border-radius: 10px;
+          background: #0E101C;
+
+          h3 {
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .statisticsWrapper {
+      width: 100%;
+      height: 39%;
+      // max-height: 255px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .openRefferralModal {
+        padding: 24px;
+        background-color: #181b3a;
+        border-radius: 10px;
+        margin-right: 20px;
+        min-width: 500px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: relative;
+
+        h3 {
+          font-size: 22px;
+          font-family: "montserrat";
+          color: white;
+          margin-bottom: 20px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid white;
+        }
+
+        .openRefferralModalInfo {
+          p {
+            font-size: 18px;
+            font-family: "montserrat";
+            color: white;
+            margin-bottom: 14px;
+          }
+
+          a {
+            color: white;
+          }
+
+          a:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .closeIcon {
+          position: absolute;
+          top: 22px;
+          right: 24px;
+          cursor: pointer;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.2);
+
+          &::after {
+            content: "";
+            width: 15px;
+            height: 3px;
+            background: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+          }
+
+          &::before {
+            content: "";
+            width: 15px;
+            height: 3px;
+            background: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+          }
+
+        }
+      }
+    }
+
+    .referencesWrapper {
+      height: 40% !important;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+
+      .referencesDiv {
+        border-radius: 10px;
+        padding: 20px;
+        width: 50%;
+        height: 100% !important;
+        background: rgba(24, 27, 58, 1);
+
+        .referencesHeading {
+          margin-bottom: 8px;
+
+          h2 {
+            font-family: "Montserrat";
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 29px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: white;
+          }
+
+        }
+
+        .references {
+          width: 100%;
+          max-height: 85%;
+          overflow-y: scroll;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+
+          .referenceItem {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 19px;
+            font-family: "Montserrat";
+            margin-bottom: 10px;
+
+            div {
+              width: 32%;
+              min-width: 215px;
+
+              &:last-child {
+                min-width: 100px;
+                width: 20%;
+                display: flex;
+                justify-content: flex-end;
+              }
+
+              &:first-child {
+                min-width: 170px;
+                display: flex;
+                justify-content: flex-start;
+              }
+            }
+
+            img {
+              width: 24px;
+              height: 24px;
+              margin-left: 20px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .monitoringDiv {
+        border-radius: 10px;
+        padding: 20px;
+        width: 49%;
+        height: 100% !important;
+        background: rgba(24, 27, 58, 1);
+
+        .monitoringHeading {
+          margin-bottom: 8px;
+
+          h2 {
+            font-family: "Montserrat";
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 29px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: white;
+            padding-left: 20px;
+            margin-bottom: 10px;
+          }
+        }
+
+        .tableMonitoring {
+          width: 100%;
+          height: 80%;
+          overflow-y: scroll;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+          table {
+            width: 100%;
+            height: 100%;
+          }
+
+          tr {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px white solid;
+
+            &:first-child {
+              border-top: 1px white solid;
+            }
+
+            td {
+              width: 33%;
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              padding: 10px 0 10px 20px;
+              color: white;
+              font-size: 14px;
+              font-weight: 400;
+              font-family: "Montserrat";
+              border-right: 1px solid white;
+
+              &:last-child {
+                border-right: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .MainPage {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 20px;
+
+    .menuWrapper {
+      width: 100%;
+      margin-bottom: 20px;
+      margin-right: 0;
+      height: fit-content;
+
+      .menu {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        height: fit-content;
+
+        .menuHeader {
+          display: flex;
+
+          .menuItem {
+            margin-bottom: 0;
+            margin-right: 25px;
+
+            img {
+              width: 25px;
+              height: 25px;
+            }
+          }
+        }
+      }
+    }
+
+    .body {
+      justify-content: flex-start;
+
+      .informationBtns {
+        height: 140px;
+        min-height: 130px;
+        margin-bottom: 20px;
+
+        .reference {
+          .refItem {
+            .refItemWrapper {
+              h3 {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+
+        .bigRefItem {
+          h3 {
+            font-size: 14px;
+          }
+        }
+
+        .balanceWrapperInfo {
+          .balanceHeader {
+            h2 {
+              font-size: 18px;
+
+              .ecoin {
+                font-size: 10px;
+                width: 20px;
+                height: 20px;
+              }
+            }
+          }
+
+          p {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .statisticsWrapper {
+        height: 270px;
+        min-height: 270px;
+        margin-bottom: 20px;
+
+        .openRefferralModal {
+          margin-right: 15px;
+        }
+      }
+
+      .referencesWrapper {
+        height: auto !important;
+        flex-direction: column;
+
+        .referencesDiv {
+          width: 100%;
+          margin-bottom: 20px;
+          height: 350px !important;
+          min-height: 120px;
+
+          .references {
+            max-height: 85%;
+
+            .referenceItem {
+              margin-bottom: 10px;
+            }
+          }
+        }
+
+        .monitoringDiv {
+          width: 100%;
+          height: auto !important;
+        }
+      }
+    }
+
+    .stats {
+      margin-right: 15px;
+    }
+
+    .swiper .swip-slide h1 {
+      font-size: 20px;
+    }
+
+    .swiper .swip-slide h3 {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .MainPage {
+    .menuWrapper {
+      .menu {
+        .menuHeader {
+          .menuItem {
+            img {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    .monitoringChartWrapper {
+      max-height: 300px;
+      margin-bottom: 20px;
+    }
+
+    .monitoringTableWrapper {
+      max-height: 100%;
+      height: 100% !important;
+      justify-content: flex-start !important;
+    }
+
+    .body {
+      .informationBtns {
+        flex-wrap: wrap;
+        margin-bottom: 0;
+        height: max-content !important;
+
+        &>div {
+          min-width: 0 !important;
+          width: 49% !important;
+          margin-right: 0 !important;
+          min-height: 130px;
+          height: 130px !important;
+          margin-bottom: 20px;
+        }
+
+        .reference>div {}
+      }
+
+      .statisticsWrapper {
+        height: auto;
+        flex-direction: column-reverse;
+        margin-bottom: 0;
+
+        .stats {
+          .stats-body {
+            min-height: 200px;
+            width: 100%;
+            justify-content: center;
+          }
+        }
+
+        &>div {
+          width: 100% !important;
+          margin-right: 0 !important;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 600px) {
+  .MainPage {
+    padding: 10px;
+
+    .menuWrapper {
+      margin-bottom: 10px;
+
+      .menu {
+        .menuHeader {
+          .menuItem {
+            img {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    .monitoringContainer {
+      padding: 10px !important;
+
+      .monitoringChartWrapper {
+        display: none;
+      }
+
+      .closeIcon {
+        top: 20px !important;
+        right: 20px !important;
+      }
+
+      .monitoringTableWrapper {
+        .monitoringTableHeading {
+          height: 3% !important;
+        }
+        
+        .monitoring{
+          height: 100% !important;
+          .monitoringHeadings{
+            border-bottom: none !important;
+          }
+        }
+
+        .hideMonitoring {
+          display: none !important;
+        }
+      }
+    }
+
+
+    .body {
+
+      .refferenceCreateContainer{
+        position: fixed;
+        z-index: 41;
+        top: 0;
+        left: 0;
+
+        .createReferenceWrapper {
+          width: 100%;
+          max-width: 100%;
+          min-width: 100%;
+          padding: 20px;
+
+          .createReferenceForm{
+            .formItem{
+              flex-direction: column;
+              margin-bottom: 20px;
+              label{
+                width: 100%;
+                text-align: left;
+                margin-bottom: 10px;
+              }
+              select,
+              input{
+                width: 100%;
+              }
+            }
+            .newRefButtonWrapper{
+              width: 100%;
+              justify-content: center;
+              button{
+                width: 100%;
+              }
+            }
+          
+          }
+        }
+      }
+      
+      .tableMonitoring{
+        table{
+          tr{
+            td{
+              min-width: 250px;
+              &:nth-of-type(2){
+                min-width: 150px;
+              }
+              &:last-child{
+                min-width: 100px;
+              }
+            }
+          }
+        }
+      }
+
+      .bigRefItemWrapper {
+        padding: 10px !important;
+      }
+
+      .referencesHeading {
+        h2 {
+          font-size: 24px !important;
+        }
+      }
+
+      .slider,
+      .stats,
+      .referencesDiv {
+        margin-bottom: 10px !important;
+      }
+
+      .informationBtns {
+        &>div {
+          width: 100% !important;
+          margin-right: 0 !important;
+          min-height: 140px;
+          height: 100px !important;
+          margin-bottom: 10px;
+        }
+
+        .bigRefItem {
+          width: 49% !important;
+        }
+
+        .reference>div {
+          min-width: 0 !important;
+          width: 100% !important;
+          margin-right: 0 !important;
+        }
+      }
+
+      .statisticsWrapper {
+        &>div {
+          width: 100% !important;
+          margin-right: 0 !important;
+          margin-bottom: 20px;
+
+          .stats-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 150px !important;
+
+            .donut-chart {
+              canvas {
+                max-width: 150px !important;
+              }
+            }
+
+            .stats-list {
+              margin: 0;
+              padding: 0;
+              padding-top: 10px;
+              margin: 0 20px 0 40px;
+
+              li {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+
+        .stats,
+        .openRefferralModal {
+          min-width: 0 !important;
+        }
+      }
+    }
+  }
+
+  .MainPage .body .referencesWrapper .referencesDiv {
+    padding: 20px 20px 10px 20px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .MainPage {
+    padding: 10px;
+
+    .menuWrapper {
+      margin-bottom: 10px !important;
+    }
+
+    .body {
+      .bigRefItemWrapper {
+        padding: 10px !important;
+      }
+
+      .informationBtns {
+        margin-bottom: 10px;
+
+        &>div {
+          margin-bottom: 10px;
+        }
+      }
+
+      .statisticsWrapper {
+        &>div {
+          .stats-body {
+            min-height: 150px !important;
+
+            .donut-chart {
+              canvas {
+                max-width: 140px !important;
+              }
+            }
+
+            .stats-list {
+              margin: 0 20px 0 10px;
+            }
+          }
+        }
+
+        .stats,
+        .openRefferralModal {
+          min-width: 0 !important;
+        }
+      }
+    }
+  }
 }

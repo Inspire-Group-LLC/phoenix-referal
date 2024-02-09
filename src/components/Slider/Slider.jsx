@@ -46,7 +46,6 @@ export default () => {
           bulletClass: "swiper-pagination-bullet",
           bulletActiveClass: "swiper-custom-bullet-active",
         }}
-        effect="fade"
         loop={true}
         autoplay={{
           delay: 3000,
