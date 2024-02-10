@@ -453,7 +453,7 @@ function Main() {
                     <span className="ecoin">E</span>
                   </h2>
                 </div>
-                <p>Курс ( 1 балл = 150 сум )</p>
+                <p>Курс ( 1 ecoin = 150 сум )</p>
               </div>
             </div>
             <div className="reference">
