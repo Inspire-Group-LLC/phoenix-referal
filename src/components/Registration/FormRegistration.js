@@ -5,20 +5,30 @@ import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../router/Route";
 import axios from "axios";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function FormRegistration() {
-  const [checked, setChecked] = useState(0);
+  const [checked, setChecked] = useState();
   const navigation = useNavigate();
 
   const url = `${APP_ROUTES.URL}/auth/register`;
-  const [nameInput, setnameInput] = useState("");
-  const [emailInput, setemailInput] = useState("");
-  const [phoneInput, setphoneInput] = useState("");
-  const [passInput, setpassInput] = useState("");
-  const [genderInput, setgenderInput] = useState("");
-  const [ageInput, setageInput] = useState("");
-  const [cityInput, setcityInput] = useState("");
+  const [nameInput, setNameInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
+  const [phoneInput, setPhoneInput] = useState("");
+  const [passInput, setPassInput] = useState("");
+  const [genderInput, setGenderInput] = useState("");
+  const [ageInput, setAgeInput] = useState("");
+  const [cityInput, setCityInput] = useState("");
 
   const handleRegistration = async () => {
+    const inputs = [nameInput, emailInput, phoneInput, passInput, genderInput, ageInput, cityInput];
+  
+    if (inputs.some((input) => input.trim() === '')) {
+      toast.error("Заполните все поля!");
+      return;
+    }
+  
     try {
       const response = await axios.post(url, {
         fullname: nameInput,
@@ -29,11 +39,9 @@ function FormRegistration() {
         age: +ageInput,
         city: cityInput,
       });
-
-      const token = response.data.access_token;
-      const user_id = response.data.user_id;
-      const balance = response.data.balance;
-
+  
+      const { access_token: token, user_id, balance } = response.data;
+  
       if (token) {
         localStorage.setItem("@token", token);
         localStorage.setItem("user_id", user_id);
@@ -42,16 +50,31 @@ function FormRegistration() {
       }
     } catch (error) {
       console.error("Ошибка входа", error);
+      toast.error("Ошибка регистрации. Попробуйте позже!");
     }
+  };
+  
+
+  const onAgeInputChange = (value) => {
+    let date = new Date();
+    let year = date.getFullYear();
+    let yearOfBirth = value.split("-")[0];
+    let age = year - yearOfBirth;
+    setAgeInput(age);
+  };
+
+  const setChekedGender = (value, gender) => {
+    setChecked(value);
+    setGenderInput(gender);
   };
 
   return (
     <div className="modalWrapper">
+      <ToastContainer />
       <div className="headerComponents">
         <h1>Регистрация</h1>
       </div>
       <div className="formWrapper">
-        {/* <FormInput type="text" placeholder="Ф.И.О." id="name" name="name" /> */}
         <div className="inputElement">
           <input
             type="text"
@@ -59,37 +82,27 @@ function FormRegistration() {
             id="name"
             name="name"
             value={nameInput}
-            onChange={(e) => setnameInput(e.target.value)}
+            onChange={(e) => setNameInput(e.target.value)}
           />
         </div>
         <div className="agePhoneNumber">
-          {/* <FormInput type="date" placeholder="Возраст" id="age" name="age" />
-          <FormInput
-            type="tel"
-            placeholder="+998 (__) ___ - __ - __ "
-            value="+998"
-            id="phone"
-            name="phone"
-          /> */}
           <div className="inputElement">
             <input
               type="date"
               placeholder="Возраст"
               id="age"
               name="age"
-              value={ageInput}
-              onChange={(e) => setageInput(e.target.value)}
+              onChange={(e) => onAgeInputChange(e.target.value)}
             />
           </div>
           <div className="inputElement">
             <input
               type="tel"
               placeholder="+998 (__) ___ - __ - __ "
-              value="+998"
               id="phone"
               name="phone"
               value={phoneInput}
-              onChange={(e) => setphoneInput(e.target.value)}
+              onChange={(e) => setPhoneInput(e.target.value)}
             />
           </div>
         </div>
@@ -100,23 +113,20 @@ function FormRegistration() {
               <p>Муж.</p>
               <input
                 type="checkbox"
-                onChange={() => setChecked(1)}
-                checked={checked === 1}
+                onChange={() => setChekedGender(0, "male")}
+                checked={checked === 0}
               />
             </div>
             <div className="genderItem">
               <p>Жен.</p>
               <input
                 type="checkbox"
-                onChange={() => setChecked(2)}
-                checked={checked === 2}
+                onChange={() => setChekedGender(1, "female")}
+                checked={checked === 1}
               />
             </div>
           </div>
         </div>
-        {/* <FormInput type="text" placeholder="Город" id="city" name="city" />
-        <FormInput type="email" placeholder="E-mail" id="email" name="email" />
-        <FormInput type="password" placeholder="Пароль" id="pass" name="pass" /> */}
         <div className="inputElement">
           <input
             type="text"
@@ -124,7 +134,7 @@ function FormRegistration() {
             id="city"
             name="city"
             value={cityInput}
-            onChange={(e) => setcityInput(e.target.value)}
+            onChange={(e) => setCityInput(e.target.value)}
           />
         </div>
         <div className="inputElement">
@@ -134,7 +144,7 @@ function FormRegistration() {
             id="email"
             name="email"
             value={emailInput}
-            onChange={(e) => setemailInput(e.target.value)}
+            onChange={(e) => setEmailInput(e.target.value)}
           />
         </div>
         <div className="inputElement">
@@ -144,7 +154,7 @@ function FormRegistration() {
             id="pass"
             name="pass"
             value={passInput}
-            onChange={(e) => setpassInput(e.target.value)}
+            onChange={(e) => setPassInput(e.target.value)}
           />
         </div>
         <div className="rememberPass">
