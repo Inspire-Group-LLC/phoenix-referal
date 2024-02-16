@@ -24,8 +24,8 @@ function FormRegistration() {
   const handleRegistration = async () => {
     const inputs = [nameInput, emailInput, phoneInput, passInput, genderInput, ageInput, cityInput];
   
-    if (inputs.some((input) => input.trim() === '')) {
-      toast.error("Заполните все поля!");
+    if (inputs.some((input) => input === "")) {
+      toast.error("Заполните все поля");
       return;
     }
   
@@ -49,8 +49,13 @@ function FormRegistration() {
         navigation(APP_ROUTES.MAIN);
       }
     } catch (error) {
-      console.error("Ошибка входа", error);
-      toast.error("Ошибка регистрации. Попробуйте позже!");
+      if(error.response.status === 409) {
+        toast.error("Пользователь с таким email или номером телефона уже существует!");
+        return;
+      } else {
+        console.error("Ошибка регистрации", error);
+        toast.error("Ошибка регистрации. Попробуйте позже!");
+      }
     }
   };
   
