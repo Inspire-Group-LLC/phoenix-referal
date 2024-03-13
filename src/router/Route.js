@@ -5,5 +5,5 @@ export const APP_ROUTES = {
   MAIN: '/main',
   REFERENCES: '/references',
   MONITORING: '/monitoring',
-  URL: 'http://192.168.12.115:3001',
+  URL: 'http://localhost:3001',
 };
