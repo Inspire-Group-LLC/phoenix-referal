@@ -106,6 +106,7 @@ function FormRegistration() {
               placeholder="+998 (__) ___ - __ - __ "
               id="phone"
               name="phone"
+              maxLength={13}
               value={phoneInput}
               onChange={(e) => setPhoneInput(e.target.value)}
             />

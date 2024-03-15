@@ -44,10 +44,10 @@ function FormLogin() {
       <ToastContainer />
       <div className="headerComponents">
         <h1>Вход</h1>
-        <div className="thirdPartyRegWrapper">
+        {/* <div className="thirdPartyRegWrapper">
           <ThirdPartyReg img={faceid} title="Face-Id" />
           <ThirdPartyReg img={oneid} title="One-ID" />
-        </div>
+        </div> */}
       </div>
       <div className="formWrapper">
         {/* <FormInput

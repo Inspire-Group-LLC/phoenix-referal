@@ -131,8 +131,13 @@ function Main() {
     }
   };
 
-  const copyRefferralLink = (link) => {
-    navigator.clipboard.writeText(link);
+  const copyRefferralLink = async (link) => {
+    try{
+      await navigator.clipboard.writeText(link);
+    } catch (error) {
+      toast.error("Ошибка системы!");
+    }
+    
     toast.success("Ссылка скопирована!");
   };
 
