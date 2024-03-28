@@ -14,7 +14,7 @@ import MonitoringPage from "../components/Monitoring/MonitoringPage";
 
 function RequireAuth({ children }) {
   const token = localStorage.getItem("@token");
-  const isTokenAvailable = token != null && token != "";
+  const isTokenAvailable = token != null && token !== "";
 
   let location = useLocation();
 
@@ -32,7 +32,6 @@ function Router() {
         <Route path="/" element={<Navigate to={APP_ROUTES.LOGIN} />} />
         <Route path={APP_ROUTES.REGISTRATION} element={<Registration />} />
         <Route path={APP_ROUTES.LOGIN} element={<Login />} />
-        {/* <Route path={APP_ROUTES.MAIN} element={<Main />} /> */}
         
         <Route
           path={APP_ROUTES.MAIN}

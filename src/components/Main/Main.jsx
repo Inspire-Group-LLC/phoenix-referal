@@ -268,8 +268,9 @@ function Main() {
                 ? "refferenceCreateContainer"
                 : "refferenceCreateContainer hidden"
             }
+            onClick={() => setIsOpenCreateRef(false)}
           >
-            <div className="createReferenceWrapper">
+            <div className="createReferenceWrapper" onClick={(e) => e.stopPropagation()}>
               <div
                 className="closeIcon"
                 onClick={() => setIsOpenCreateRef(false)}

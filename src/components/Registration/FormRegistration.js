@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../router/Route";
 import axios from "axios";
 
+import eye from "../../images/eye.png";
+import closeneye from "../../images/closeneye.png";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,18 +20,48 @@ function FormRegistration() {
   const [emailInput, setEmailInput] = useState("");
   const [phoneInput, setPhoneInput] = useState("");
   const [passInput, setPassInput] = useState("");
+  const [passInputRepeat, setPassInputRepeat] = useState("");
   const [genderInput, setGenderInput] = useState("");
   const [ageInput, setAgeInput] = useState("");
   const [cityInput, setCityInput] = useState("");
 
+  const togglePasswordVisibility = () => {
+    const passwordInputs = document.querySelectorAll(".passwordInput");
+    const openEye = document.querySelector(".openeye");
+    const closeEye = document.querySelector(".closeneye");
+
+    passwordInputs.forEach((input) => {
+      input.type = input.type === "password" ? "text" : "password";
+    });
+
+    openEye.style.display =
+      openEye.style.display === "block" ? "none" : "block";
+    closeEye.style.display =
+      closeEye.style.display === "block" ? "none" : "block";
+  };
+
   const handleRegistration = async () => {
-    const inputs = [nameInput, emailInput, phoneInput, passInput, genderInput, ageInput, cityInput];
-  
+    const inputs = [
+      nameInput,
+      emailInput,
+      phoneInput,
+      passInput,
+      passInputRepeat,
+      genderInput,
+      ageInput,
+      cityInput,
+    ];
+
+    if (passInput !== passInputRepeat) {
+      toast.error("Пароли не совпадают");
+      return;
+    }
+
     if (inputs.some((input) => input === "")) {
       toast.error("Заполните все поля");
       return;
     }
-  
+
     try {
       const response = await axios.post(url, {
         fullname: nameInput,
@@ -39,9 +72,9 @@ function FormRegistration() {
         age: +ageInput,
         city: cityInput,
       });
-  
+
       const { access_token: token, user_id, balance } = response.data;
-  
+
       if (token) {
         localStorage.setItem("@token", token);
         localStorage.setItem("user_id", user_id);
@@ -49,8 +82,10 @@ function FormRegistration() {
         navigation(APP_ROUTES.MAIN);
       }
     } catch (error) {
-      if(error.response.status === 409) {
-        toast.error("Пользователь с таким email или номером телефона уже существует!");
+      if (error.response.status === 409) {
+        toast.error(
+          "Пользователь с таким email или номером телефона уже существует!"
+        );
         return;
       } else {
         console.error("Ошибка регистрации", error);
@@ -58,7 +93,6 @@ function FormRegistration() {
       }
     }
   };
-  
 
   const onAgeInputChange = (value) => {
     let date = new Date();
@@ -159,8 +193,24 @@ function FormRegistration() {
             placeholder="Пароль"
             id="pass"
             name="pass"
+            className="passwordInput"
             value={passInput}
             onChange={(e) => setPassInput(e.target.value)}
+          />
+          <div className="showPass" onClick={() => togglePasswordVisibility()}>
+            <img src={eye} alt="eye" className="openeye" />
+            <img src={closeneye} alt="closeneye" className="closeneye" />
+          </div>
+        </div>
+        <div className="inputElement">
+          <input
+            type="password"
+            placeholder="Повторите пароль"
+            id="passRepeat"
+            className="passwordInput"
+            name="pass"
+            value={passInputRepeat}
+            onChange={(e) => setPassInputRepeat(e.target.value)}
           />
         </div>
         <div className="rememberPass">
