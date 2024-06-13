@@ -24,7 +24,6 @@ export default () => {
       description: "This is the second slide.",
       image: "path/to/image2.jpg",
     },
-    // ... more slides
   ];
 
   SwiperCore.use([Autoplay])

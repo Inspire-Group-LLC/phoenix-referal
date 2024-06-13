@@ -4,61 +4,58 @@ import axios from "axios";
 import Statistics from "../Statistics/Statistics";
 import Slider from "../Slider/Slider";
 import "./Main.scss";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import logo from "../../images/logo.svg";
 import userIcon from "../../images/user.svg";
 import settings from "../../images/settings.svg";
 import logout from "../../images/logout.svg";
+import profileIcon from "../../images/profile.svg";
 import download from "../../images/downloadIcon.svg";
 import plusIcon from "../../images/plusIcon.svg";
 import eyeIcon from "../../images/eyeIcon.svg";
 import copy from "../../images/copy.svg";
 import wasteIcon from "../../images/wasteIcon.svg";
-import LineChart from "../Monitoring/LineChart";
-import { useNavigate } from "react-router-dom";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-const options = [
-  { value: "formale", label: "Для Мужчин", id: 1 },
-  { value: "forfemale", label: "Для Женщин", id: 2 },
-  { value: "weightloss", label: "Для Похудения", id: 3 },
-];
-
-const options2 = [
-  { value: "uropro", label: "Uro Pro", id: 1 },
-  { value: "slimfit", label: "Slimfit", id: 2 },
-  { value: "doactive", label: "Do Active", id: 3 },
-];
+import { Monitoring } from "../Monitoring/Monitoring";
+import { CreateReferral } from "../CreateReferral/CreateReferral";
+import { ProfilePage } from "../ProfilePage/ProfilePage";
+import { ReferralContainer } from "../ReferralContainer/ReferralContainer";
 
 function Main() {
+  const [isOpenStatusBar, setIsOpenStatusBar] = useState(true);
   const [isOpenReferrals, setIsOpenReferrals] = useState(false);
   const [isOpenCreateRef, setIsOpenCreateRef] = useState(false);
+  const [isOpenProfile, setIsOpenProfile] = useState(false);
   const [isOpenMonitoring, setIsOpenMonitoring] = useState(false);
-  const [isOpenMonitoringChart, setIsOpenMonitoringChart] = useState(false);
   const [monitoringStyles, setMonitoringStyles] = useState({ height: "50%" });
-  const [monitoringChartStyles, setMonitoringChartStyles] = useState({
-    height: "48%",
-    padding: "20px",
-  });
   const [monitoringButton, setMonitoringButton] = useState(false);
-  const [monitoringCloseButton, setMonitoringCloseButton] = useState({
-    transform: "rotate(0deg)",
-  });
-  const [balance, setBalance] = useState(0);
+  const [profile, setProfile] = useState({});
   const [referrals, setReferrals] = useState([]);
   const [referralModal, setReferralModal] = useState({});
   const [isOpenReferralModal, setIsOpenReferralModal] = useState(false);
   const [referralsLength, setReferralsLength] = useState(0);
+  const [selectedPhotos, setSelectedPhotos] = useState([]);
+  const [rate, setRate] = useState(1);
+  const [isOpenVerificationAccordion, setIsOpenVerificationAccordion] =
+    useState(false);
+  const [token, setToken] = useState("");
+  const [monitoringChartStyles, setMonitoringChartStyles] = useState({
+    height: "48%",
+    padding: "20px",
+  });
+  const [monitoringCloseButton, setMonitoringCloseButton] = useState({
+    transform: "rotate(0deg)",
+  });
 
-  const user_id = +localStorage.getItem("user_id");
-  const token = localStorage.getItem("@token");
-  const balanceInfo = localStorage.getItem("balance");
+  useState(() => {
+    setToken(localStorage.getItem("@token"));
+  }, []);
 
   const [newRef, setNewRef] = useState({
-    user_id,
     title: "",
-    category_id: 0,
     product_id: 0,
   });
 
@@ -66,7 +63,7 @@ function Main() {
 
   const getRef = () => {
     axios
-      .get(`${APP_ROUTES.URL}/referral/${user_id}`, {
+      .get(`${APP_ROUTES.URL}/referral`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -80,11 +77,37 @@ function Main() {
       });
   };
 
-  useEffect(() => {
-    setBalance(balanceInfo);
+  const getRate = () => {
+    axios
+      .get(`${APP_ROUTES.URL}/admin/rate`)  
+      .then((res) => {
+        setRate(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
+  const getProfile = () => {
+    axios
+      .get(`${APP_ROUTES.URL}/auth/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setProfile(res.data);
+        getRate();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
     if (token) {
       getRef();
+      getProfile();
     }
   }, []);
 
@@ -93,9 +116,15 @@ function Main() {
     setIsOpenMonitoring(false);
     setIsOpenCreateRef(false);
     setIsOpenReferrals(false);
+    setIsOpenProfile(false);
   };
 
   const createRefWithData = () => {
+    if (newRef.title === "" || newRef.product_id === 0) {
+      toast.error("Заполните все поля!");
+      return;
+    }
+
     if (token) {
       axios
         .post(`${APP_ROUTES.URL}/referral`, newRef, {
@@ -106,7 +135,7 @@ function Main() {
         .then((res) => {
           getRef();
           setIsOpenCreateRef(false);
-          setNewRef({ user_id, title: "", category_id: 0, product_id: 0 });
+          setNewRef({ title: "", product_id: 0 });
         })
         .catch((err) => {
           console.log(err);
@@ -132,12 +161,12 @@ function Main() {
   };
 
   const copyRefferralLink = async (link) => {
-    try{
+    try {
       await navigator.clipboard.writeText(link);
     } catch (error) {
       toast.error("Ошибка системы!");
     }
-    
+
     toast.success("Ссылка скопирована!");
   };
 
@@ -166,34 +195,90 @@ function Main() {
   };
 
   const openMonitoring = (boolState) => {
-    boolState
-      ? setMonitoringStyles({ height: "50%" })
-      : setMonitoringStyles({ height: "100%" });
-    boolState
-      ? setMonitoringChartStyles({ height: "48%", padding: "20px" })
-      : setMonitoringChartStyles({ height: "0%", marginBottom: "0" });
-    boolState
-      ? setMonitoringCloseButton({ transform: "rotate(0deg)" })
-      : setMonitoringCloseButton({ transform: "rotate(180deg)" });
+    const monitoringHeight = boolState ? "50%" : "100%";
+    const chartHeight = boolState ? "48%" : "0%";
+    const chartPadding = boolState ? "20px" : "0";
+    const closeButtonRotation = boolState ? "0deg" : "180deg";
 
+    setMonitoringStyles({ height: monitoringHeight });
+    setMonitoringChartStyles({ height: chartHeight, padding: chartPadding });
+    setMonitoringCloseButton({ transform: `rotate(${closeButtonRotation})` });
     setMonitoringButton(!boolState);
   };
 
   const logoutSystem = () => {
     localStorage.removeItem("@token");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("balance");
     window.location.reload();
+  };
+
+  const uploadPhoto = async (photo) => {
+    const formData = new FormData();
+    formData.append("file", photo);
+
+    try {
+      const response = await axios.post(
+        `${APP_ROUTES.URL}/products/upload`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // setProductObject((prev) => ({
+      //   ...prev,
+      //   image: {
+      //     images: [...prev.image.images, response.data],
+      //   },
+      // }));
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const handleFileInputChange = async (event) => {
+    if (event.target.files.length > 2) {
+      toast.error("Максимальное количество фото 2");
+      return;
+    } else if(event.target.files.length === 1) {
+      toast.error("Минимальное количество фото 2");
+      return;
+    }
+
+    const files = event.target.files;
+    setSelectedPhotos(files);
+
+    try {
+      const uploadPromises = Array.from(files).map(uploadPhoto);
+      await Promise.all(uploadPromises);
+    } catch (error) {
+      toast.error("Произошла ошибка при загрузке фото");
+    }
   };
 
   return (
     <>
       <ToastContainer />
-      <div className="MainPage">
+
+      {!isOpenProfile && isOpenStatusBar && (
+        <div
+          className="statusBar"
+          style={{ backgroundColor: "#f1c40f", color: "black" }}
+        >
+          <div className="statusInfo">Номер Договора: {profile.id}</div>
+          <button className="updateStatusBtn" 
+            onClick={() => setIsOpenProfile(true)}
+          >Верефицировать</button>
+          <div
+            className="closeStatusBar"
+            onClick={() => setIsOpenStatusBar(false)}
+          ></div>
+        </div>
+      )}
+      <div className="MainPage" style={{ height: (isOpenProfile || !isOpenStatusBar) && "100%" }}>
         <div className="menuWrapper">
-          {/* <div className="logoWrapper">
-          <img src={logo} className="logo" alt="logo" />
-        </div> */}
           <div className="menu">
             <div className="menuHeader">
               <div className="menuItem">
@@ -207,259 +292,83 @@ function Main() {
               </div>
             </div>
             <div className="logoutWrapper">
+              <div className="menuItem profileIcon">
+                <img
+                  src={profileIcon}
+                  alt="profileIcon"
+                  onClick={() => setIsOpenProfile(!isOpenProfile)}
+                  // style={{ borderColor: "#FFD700", animation: "none" }}
+                />
+              </div>
               <div className="menuItem">
                 <img src={logout} alt="logout" onClick={logoutSystem} />
               </div>
             </div>
           </div>
         </div>
+
         <div className="body">
-          <div
-            className={
-              isOpenReferrals
-                ? "referencesContainer"
-                : "referencesContainer hidden"
-            }
-          >
-            <div
-              className="closeIcon"
-              onClick={() => setIsOpenReferrals(false)}
-            ></div>
+          <ReferralContainer
+            isOpenReferrals={isOpenReferrals}
+            setIsOpenReferrals={setIsOpenReferrals}
+            referrals={referrals}
+            parseCustomDateFormat={parseCustomDateFormat}
+            wasteIcon={wasteIcon}
+            deleteRef={deleteRef}
+          />
 
-            <div className="allReferencesWrapper">
-              <div className="referencesHeading">
-                <h2>Ссылки</h2>
-              </div>
-              <div className="references">
-                <div className="referenceHeadingRow">
-                  <div className="refName">Название</div>
-                  <div className="refUrl">Ссылка</div>
-                  <div className="refCategory">Категории</div>
-                  <div className="refDate">Дата</div>
-                  <div></div>
-                </div>
+          {/* ============================== profile page ================================= */}
 
-                {referrals.map((item) => (
-                  <div className="referenceItem" key={item.id}>
-                    <div className="refName">{item.title}</div>
-                    <div className="refUrl">{item.url_link}</div>
-                    <div className="refCategory">
-                      category {item.category_id}
-                    </div>
-                    <div className="refDate">
-                      {parseCustomDateFormat(item.created_at)}
-                    </div>
-                    <div className="refFunctions">
-                      <img
-                        src={wasteIcon}
-                        alt="wasteIcon"
-                        onClick={() => deleteRef(item.id)}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <ProfilePage
+            isOpenProfile={isOpenProfile}
+            setIsOpenProfile={setIsOpenProfile}
+            profile={profile}
+            rate={rate}
+            isOpenVerificationAccordion={isOpenVerificationAccordion}
+            setIsOpenVerificationAccordion={setIsOpenVerificationAccordion}
+            handleFileInputChange={handleFileInputChange}
+          />
 
-          <div
-            className={
-              isOpenCreateRef
-                ? "refferenceCreateContainer"
-                : "refferenceCreateContainer hidden"
-            }
-            onClick={() => setIsOpenCreateRef(false)}
-          >
-            <div className="createReferenceWrapper" onClick={(e) => e.stopPropagation()}>
-              <div
-                className="closeIcon"
-                onClick={() => setIsOpenCreateRef(false)}
-              ></div>
-              <div className="createReferenceHeading">
-                <h2>Создание новой реферальной ссылки</h2>
-              </div>
-              <div className="createReferenceForm">
-                <div className="formItem">
-                  <label htmlFor="refName">Выбор категории</label>
-                  <select
-                    name="category"
-                    id="categorySelect"
-                    onChange={(e) =>
-                      setNewRef({ ...newRef, category_id: +e.target.value })
-                    }
-                  >
-                    {options.map((option) => (
-                      <option key={option.value} value={option.id}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="formItem">
-                  <label htmlFor="refUrl">Выбор товара</label>
-                  <select
-                    name="refProduct"
-                    id="refProductSelect"
-                    onChange={(e) =>
-                      setNewRef({ ...newRef, product_id: +e.target.value })
-                    }
-                  >
-                    {options2.map((option) => (
-                      <option key={option.value} value={option.id}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="formItem">
-                  <label htmlFor="refCategory">Название ссылки</label>
-                  <input
-                    type="text"
-                    id="refCategory"
-                    placeholder="Название"
-                    value={newRef.title}
-                    onChange={(e) =>
-                      setNewRef({ ...newRef, title: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="newRefButtonWrapper">
-                  <button onClick={createRefWithData}>Создать</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* ============================= create Refference page =================== */}
 
-          <div
-            className={
-              isOpenMonitoring
-                ? "monitoringContainer"
-                : "monitoringContainer hidden"
-            }
-          >
-            <div className="monitoringWrapper">
-              <div
-                className="closeIcon"
-                onClick={() => setIsOpenMonitoring(false)}
-              ></div>
-              <div
-                className="monitoringChartWrapper"
-                style={monitoringChartStyles}
-              >
-                <LineChart />
-              </div>
-              <div className="monitoringTableWrapper" style={monitoringStyles}>
-                <div className="monitoringTableHeading">
-                  <h3>Монитроинг</h3>
-                  <div className="hideMonitoring">
-                    <p>Открыть статистику</p>
-                    <div
-                      className="upIcon"
-                      style={monitoringCloseButton}
-                      onClick={() => openMonitoring(monitoringButton)}
-                    ></div>
-                  </div>
-                </div>
-                <div className="monitoring">
-                  <div className="monitoringHeadings">
-                    <div>Имя</div>
-                    <div>Ссылка</div>
-                    <div>Категория</div>
-                    <div>Статус</div>
-                    <div>Номер телефона</div>
-                  </div>
-                  <div className="monitoringDividerLine"></div>
-                  <div className="monitoringItemsWrapper">
-                    <div className="monitoringItems">
-                      <div className="monitoringItem">Амиров Амир Амирович</div>
-                      <div className="monitoringItem">https://сайт.уз</div>
-                      <div className="monitoringItem">БАД V67</div>
-                      <div className="monitoringItem">Успешно</div>
-                      <div className="monitoringItem">+998930174327</div>
-                    </div>
-                    <div className="monitoringItems">
-                      <div className="monitoringItem">Амиров Амир Амирович</div>
-                      <div className="monitoringItem">https://сайт.уз</div>
-                      <div className="monitoringItem">БАД V67</div>
-                      <div className="monitoringItem">Успешно</div>
-                      <div className="monitoringItem">+998930174327</div>
-                    </div>
-                    <div className="monitoringItems">
-                      <div className="monitoringItem">Амиров Амир Амирович</div>
-                      <div className="monitoringItem">https://сайт.уз</div>
-                      <div className="monitoringItem">БАД V67</div>
-                      <div className="monitoringItem">Успешно</div>
-                      <div className="monitoringItem">+998930174327</div>
-                    </div>
-                    <div className="monitoringItems">
-                      <div className="monitoringItem">Амиров Амир Амирович</div>
-                      <div className="monitoringItem">https://сайт.уз</div>
-                      <div className="monitoringItem">БАД V67</div>
-                      <div className="monitoringItem">Успешно</div>
-                      <div className="monitoringItem">+998930174327</div>
-                    </div>
-                    <div className="monitoringItems">
-                      <div className="monitoringItem">Амиров Амир Амирович</div>
-                      <div className="monitoringItem">https://сайт.уз</div>
-                      <div className="monitoringItem">БАД V67</div>
-                      <div className="monitoringItem">Успешно</div>
-                      <div className="monitoringItem">+998930174327</div>
-                    </div>
-                    <div className="monitoringItems">
-                      <div className="monitoringItem">Амиров Амир Амирович</div>
-                      <div className="monitoringItem">https://сайт.уз</div>
-                      <div className="monitoringItem">БАД V67</div>
-                      <div className="monitoringItem">Успешно</div>
-                      <div className="monitoringItem">+998930174327</div>
-                    </div>
-                    <div className="monitoringItems">
-                      <div className="monitoringItem">Амиров Амир Амирович</div>
-                      <div className="monitoringItem">https://сайт.уз</div>
-                      <div className="monitoringItem">БАД V67</div>
-                      <div className="monitoringItem">Успешно</div>
-                      <div className="monitoringItem">+998930174327</div>
-                    </div>
-                    <div className="monitoringItems">
-                      <div className="monitoringItem">Амиров Амир Амирович</div>
-                      <div className="monitoringItem">https://сайт.уз</div>
-                      <div className="monitoringItem">БАД V67</div>
-                      <div className="monitoringItem">Успешно</div>
-                      <div className="monitoringItem">+998930174327</div>
-                    </div>
-                    <div className="monitoringItems">
-                      <div className="monitoringItem">Амиров Амир Амирович</div>
-                      <div className="monitoringItem">https://сайт.уз</div>
-                      <div className="monitoringItem">БАД V67</div>
-                      <div className="monitoringItem">Успешно</div>
-                      <div className="monitoringItem">+998930174327</div>
-                    </div>
-                    <div className="monitoringItems">
-                      <div className="monitoringItem">Амиров Амир Амирович</div>
-                      <div className="monitoringItem">https://сайт.уз</div>
-                      <div className="monitoringItem">БАД V67</div>
-                      <div className="monitoringItem">Успешно</div>
-                      <div className="monitoringItem">+998930174327</div>
-                    </div>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <CreateReferral
+            isOpenCreateRef={isOpenCreateRef}
+            setIsOpenCreateRef={setIsOpenCreateRef}
+            setNewRef={setNewRef}
+            newRef={newRef}
+            createRefWithData={createRefWithData}
+          />
+
+          {/* ============================= Monitoring page =================== */}
+
+          <Monitoring
+            isOpenMonitoring={isOpenMonitoring}
+            setIsOpenMonitoring={setIsOpenMonitoring}
+            monitoringChartStyles={monitoringChartStyles}
+            monitoringStyles={monitoringStyles}
+            monitoringCloseButton={monitoringCloseButton}
+            openMonitoring={openMonitoring}
+            monitoringButton={monitoringButton}
+          />
 
           <div className="informationBtns">
             <div className="balanceWrapper">
               <div className="balanceWrapperInfo">
                 <div className="balanceHeader">
                   <h2>
-                    Ваш баланс - {balance === undefined ? balance : 0} сум
+                    Ваш баланс -{" "}
+                    {(profile.balance * rate).toFixed(2)} сум
                   </h2>
                   <h2>
-                    Ecoin - {balance === undefined ? balance / 150 : 0}
+                    Ecoin -{" "}
+                    {profile.balance === undefined
+                      ? 0
+                      : profile.balance === undefined ? 0 : profile.balance
+                    }
                     <span className="ecoin">E</span>
                   </h2>
                 </div>
-                <p>Курс ( 1 ecoin = 150 сум )</p>
+                <p>Курс ( 1 ecoin = {rate} сум )</p>
               </div>
             </div>
             <div className="reference">
@@ -514,7 +423,10 @@ function Main() {
                   <p>Оставленно заявок: 0</p>
                   <p>Куплено: 0</p>
                 </div>
-                <div className="closeIcon" onClick={() => setIsOpenReferralModal(false)}></div>
+                <div
+                  className="closeIcon"
+                  onClick={() => setIsOpenReferralModal(false)}
+                ></div>
               </div>
             ) : (
               <Statistics />
@@ -559,121 +471,6 @@ function Main() {
                       <td>Имя</td>
                       <td>Номер</td>
                       <td>Статус</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
-                    </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
                     </tr>
                     <tr>
                       <td>Амиров Амир Амирович</td>

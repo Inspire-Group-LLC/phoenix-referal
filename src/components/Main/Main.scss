@@ -1,6 +1,88 @@
+.statusBar {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(0, 0, 0);
+  padding: 0 20px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  padding: 0 20px;
+
+  .updateStatusBtn {
+    padding: 5px 20px;
+    background: #000000;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 14px;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background: #e53f5200;
+      color: rgb(0, 0, 0);
+    }
+  }
+
+  .closeStatusBar {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background: #00000045;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      width: 15px;
+      height: 2px;
+      background: rgb(255, 255, 255);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      width: 15px;
+      height: 2px;
+      background: rgb(255, 255, 255);
+    }
+  }
+}
+
+.monitoringChartWrapper {
+
+  & tspan {
+    fill: white !important;
+  }
+
+  & line {
+    stroke: rgba(255, 255, 255, 0.18) !important;
+  }
+
+  & .css-1u2hdaw-MuiChartsAxisHighlight-root {
+    stroke: white !important;
+  }
+}
+
 .MainPage {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 40px);
   padding: 20px;
   display: flex;
 
@@ -35,6 +117,43 @@
       .menuHeader {
         .menuItem {
           margin-bottom: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .logoutWrapper {
+        .menuItem.profileIcon {
+          margin-bottom: 30px;
+
+          img {
+            border: 5px rgb(213, 0, 0) solid;
+            border-radius: 50px;
+            width: 40px;
+            height: 40px;
+            animation: borderColorPulse 1s infinite linear;
+
+            @keyframes borderColorPulse {
+              0% {
+                filter: brightness(1);
+              }
+
+              50% {
+                filter: brightness(0.5);
+              }
+
+              100% {
+                filter: brightness(1);
+              }
+            }
+          }
+        }
+
+        .menuItem {
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
 
@@ -88,6 +207,442 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+
+    .profileContainer {
+      width: 100%;
+      height: 100%;
+      background: rgba(24, 27, 58, 1);
+      position: absolute;
+      z-index: 41;
+      top: 0;
+      left: 0;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      // customize scrollbar
+      &::-webkit-scrollbar {
+        width: 0px;
+      }
+
+      .closeIcon {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 3;
+      }
+
+      .statusAndProfileWrapper {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .profileWrapper {
+        width: 100%;
+        background: linear-gradient(139.53deg, #FF2C2C 12.43%, rgba(251, 152, 4, 0.796875) 24.55%, rgba(223, 255, 218, 0.23084) 45.29%, rgba(255, 255, 255, 0) 50.9%, rgba(255, 10, 127, 0.82) 75.08%, #780EFF 88.57%);
+        border-radius: 8px;
+        box-shadow: 16.10348129272461px -13.956351280212402px 19.700000762939453px 0px #FF00001F;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .profileInfo {
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-start;
+          flex-direction: column;
+          width: calc(100% - 6px);
+          height: calc(100% - 6px);
+          border-radius: 8px;
+          padding: 15px 20px 30px 20px;
+          background: #050024;
+
+          .profileInfoWrapper{
+            display: flex;
+            gap : 40px;
+            
+          }
+        }
+      }
+
+      .statusInfoWrapper {
+        width: 100%;
+        background: linear-gradient(139.53deg, #FF2C2C 12.43%, rgba(251, 152, 4, 0.796875) 24.55%, rgba(223, 255, 218, 0.23084) 45.29%, rgba(255, 255, 255, 0) 50.9%, rgba(255, 10, 127, 0.82) 75.08%, #780EFF 88.57%);
+        border-radius: 8px;
+        box-shadow: 16.10348129272461px -13.956351280212402px 19.700000762939453px 0px #FF00001F;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .statusInfo {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 0 30px;
+          width: calc(100% - 6px);
+          height: calc(100% - 6px);
+          border-radius: 8px;
+          padding: 15px 20px 20px 20px;
+          background: #050024;
+        }
+      }
+
+      .textInfo {
+        color: rgb(170, 170, 170);
+        font-family: "Montserrat";
+        font-size: 18px;
+
+        span {
+          font-weight: 500;
+          color: white;
+        }
+      }
+
+      .profileName {
+        font-size: 26px;
+        margin-bottom: 20px;
+        color: white;
+      }
+
+      .recomendationText {
+        font-size: 16px;
+        color: rgb(166, 166, 166);
+      }
+
+      .statusInfoText {
+        font-size: 26px;
+        margin-bottom: 20px;
+        color: rgb(255, 255, 255);
+
+        @keyframes pulseText {
+          0% {
+            filter: brightness(1);
+          }
+
+          50% {
+            filter: brightness(0.5);
+          }
+
+          100% {
+            filter: brightness(1);
+          }
+        }
+
+        span {
+          animation: pulseText 1s infinite linear;
+        }
+      }
+
+      button {
+        padding: 10px 50px;
+        background: #e53f5200;
+        border: 1px solid white;
+        border-radius: 5px;
+        color: white;
+        font-family: "Montserrat";
+        font-weight: 500;
+        font-size: 16px;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover {
+          background: #ffffff;
+          color: black;
+        }
+      }
+
+      .phoneNumber,
+      .loginInfo {
+        margin-bottom: 20px;
+      }
+
+      .verificationForm {
+        margin-top: 20px;
+        width: 100%;
+        border-radius: 8px;
+        background: rgb(213, 0, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .verificationFormWrapper {
+          background-color: #050024;
+          border-radius: 8px;
+          width: calc(100% - 6px);
+          height: calc(100% - 6px);
+          padding: 20px;
+
+          .verificationAccordeonHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-bottom: 8px;
+
+            h2 {
+              font-family: "Montserrat";
+              font-size: 22px;
+              font-weight: 500;
+              line-height: 29px;
+              letter-spacing: 0em;
+              text-align: left;
+              color: white;
+            }
+
+            .toggleArrow {
+              width: 30px;
+              height: 30px;
+              background: white;
+              border-radius: 8px;
+              position: relative;
+              transition: 0.3s;
+              cursor: pointer;
+
+              &::before,
+              &::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 15px;
+                height: 2px;
+                background: black;
+                transition: 0.3s;
+              }
+
+              &::after {
+                transform: translate(-50%, -50%) rotate(90deg);
+              }
+
+              &:hover {
+                transform: scale(1.2);
+                background: rgb(13, 255, 0);
+              }
+            }
+          }
+
+          .verificationAccordionBody {
+            display: grid;
+            grid-template-rows: 0fr;
+            overflow: hidden;
+            transition: 0.3s;
+
+            & * {
+              min-height: 0;
+            }
+
+            .verificationAccordionWrapper {
+              width: 100%;
+              display: grid;
+              grid-template-columns: 1fr 1fr 1fr;
+              gap: 20px;
+
+              .formInputWrapper {
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                flex-direction: column;
+
+                .examplePassport {
+                  display: flex;
+                  justify-content: space-between;
+                  width: 100%;
+                  gap: 10px;
+                  margin-bottom: 20px;
+
+                  img {
+                    width: 48%;
+                    height: 150px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                  }
+                }
+
+                input[type="file"] {
+                  border: dotted 1px white;
+                  height: 70px;
+                }
+
+                .submitLabel {
+                  opacity: 0;
+                }
+
+                label {
+                  font-family: "Montserrat";
+                  font-size: 16px;
+                  font-weight: 400;
+                  line-height: 19px;
+                  letter-spacing: 0em;
+                  text-align: left;
+                  color: rgb(169, 169, 169);
+                  margin-bottom: 5px;
+                }
+
+                input,
+                select {
+                  width: 100%;
+                  font-family: "Montserrat";
+                  font-size: 16px;
+                  font-weight: 500;
+                  line-height: 19px;
+                  letter-spacing: 0em;
+                  text-align: left;
+                  color: white;
+                  background: #00000000;
+                  border: 1px white solid;
+                  outline: none;
+                  border-radius: 5px;
+                  padding: 10px;
+                  margin-bottom: 10px;
+
+                  &:focus {
+                    border: 1px rgb(0, 119, 255) solid;
+                  }
+
+                  & option {
+                    color: black;
+                    font-weight: 500;
+                  }
+                }
+
+                button {
+                  width: 100%;
+                  padding: 10px;
+                  background: #00880e;
+                  border: 1px solid white;
+                  border-radius: 5px;
+                  color: white;
+                  font-family: "Montserrat";
+                  font-weight: 500;
+                  font-size: 16px;
+                  margin-top: 25px;
+
+                  &:hover {
+                    background: #ffffff;
+                    color: black;
+                  }
+                }
+
+                ::-webkit-calendar-picker-indicator {
+                  filter: invert(1);
+                }
+
+              }
+            }
+          }
+
+          &.active {
+            .toggleArrow {
+              &:hover {
+                background: rgb(213, 0, 0);
+              }
+
+              &::after {
+                transform: translate(-50%, -50%) rotate(0deg);
+              }
+            }
+
+            .verificationAccordionBody {
+              grid-template-rows: 1fr;
+              opacity: 1;
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+
+      .withdrawal {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+
+        .withdrawalDiv {
+          border-radius: 10px;
+          width: 100%;
+          height: 100% !important;
+          background: rgba(24, 27, 58, 1);
+
+          .withdrawalHeading {
+            margin-bottom: 8px;
+
+            h2 {
+              font-family: "Montserrat";
+              font-size: 24px;
+              font-weight: 500;
+              line-height: 29px;
+              letter-spacing: 0em;
+              text-align: left;
+              color: white;
+              padding-left: 20px;
+              margin-bottom: 10px;
+            }
+          }
+
+          .tableWithdrawal {
+            width: 100%;
+            height: 85%;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+              display: none;
+            }
+
+            table {
+              width: 100%;
+              height: 100%;
+            }
+
+            tr {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              border-bottom: 1px white solid;
+
+              &:first-child {
+                border-top: 1px white solid;
+              }
+
+              td {
+                width: 50%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 10px 0 10px 20px;
+                color: white;
+                font-size: 14px;
+                font-weight: 400;
+                font-family: "Montserrat";
+                border-right: 1px solid white;
+
+                &:first-child {
+                  max-width: 100px;
+                  min-width: 100px;
+                }
+
+                &:last-child {
+                  border-right: none;
+                  max-width: 200px;
+                  min-width: 200px;
+                }
+              }
+            }
+          }
+        }
       }
     }
 
@@ -553,7 +1108,7 @@
 
     .informationBtns {
       width: 100%;
-      min-height: 100px;
+      min-height: 120px;
       height: 18%;
       display: flex;
       justify-content: space-between;
@@ -731,12 +1286,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin: 10px 0;
 
       .openRefferralModal {
         padding: 24px;
         background-color: #181b3a;
         border-radius: 10px;
-        margin-right: 20px;
+        margin-right: 10px;
         min-width: 500px;
         height: 100%;
         display: flex;
@@ -960,7 +1516,7 @@
   .MainPage {
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: auto !important;
     padding-bottom: 20px;
 
     .menuWrapper {
@@ -987,6 +1543,26 @@
             img {
               width: 25px;
               height: 25px;
+            }
+          }
+        }
+
+        .logoutWrapper {
+          display: flex;
+
+          .menuItem {
+            margin-bottom: 0 !important;
+            margin-right: 20px;
+
+            &.profileIcon {
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+
+            &:last-child {
+              margin-right: 0;
             }
           }
         }
@@ -1032,6 +1608,52 @@
 
           p {
             font-size: 14px;
+          }
+        }
+      }
+
+      .profileContainer {
+        .closeIcon {
+          position: absolute;
+          top: 0px;
+          right: 0px;
+        }
+
+        .statusAndProfileWrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          .statusInfoWrapper {
+            .statusInfo {
+              .recomendationText {
+                margin-bottom: 20px;
+              }
+            }
+          }
+        }
+
+        .verificationForm{
+          .verificationFormWrapper{
+            .verificationAccordionBody{
+              .verificationAccordionWrapper{
+                grid-template-columns: 1fr;
+                gap: 0;
+
+                .formInputWrapper{
+                  .examplePassport{
+                    gap: 0;
+                    img{
+                      width: 49%;
+                      min-height: 300px;
+                    }
+                    img:not(:first-child){
+                      margin-left: 10px;
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1123,7 +1745,7 @@
     .body {
       .informationBtns {
         flex-wrap: wrap;
-        margin-bottom: 0;
+        margin-bottom: 0 !important;
         height: max-content !important;
 
         &>div {
@@ -1142,6 +1764,7 @@
         height: auto;
         flex-direction: column-reverse;
         margin-bottom: 0;
+        margin-top: 0;
 
         .stats {
           .stats-body {
@@ -1214,6 +1837,56 @@
 
 
     .body {
+
+      .profileContainer {
+
+        .verificationForm{
+          .verificationFormWrapper{
+            .verificationAccordionBody{
+              .verificationAccordionWrapper{
+                .formInputWrapper{
+                  .examplePassport{
+                    img{
+                      min-height: 150px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .profileName,
+        .statusInfoText {
+          font-size: 18px;
+        }
+
+        .textInfo {
+          font-size: 16px;
+        }
+
+        button {
+          width: 100%;
+          padding: 10px 30px;
+          font-size: 14px;
+        }
+
+        .withdrawal {
+
+
+          .withdrawalDiv {
+            .tableWithdrawal {
+              width: 100%;
+
+              tr {
+                td {
+                  min-width: 200px;
+                }
+              }
+            }
+          }
+        }
+      }
 
       .refferenceCreateContainer {
         position: fixed;
@@ -1347,6 +2020,15 @@
           min-width: 0 !important;
         }
       }
+    }
+  }
+
+  .statusBar{
+    .statusInfo{
+      font-size: 14px;
+    }
+    .closeStatusBar{
+      display: none;
     }
   }
 

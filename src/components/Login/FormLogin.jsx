@@ -69,12 +69,12 @@ function FormLogin() {
 
         <div className="inputElement">
           <input
-            type="email"
-            placeholder="E-mail"
-            id="email"
+            type="text"
+            placeholder="Логин"
+            id="login"
             value={emailInput}
             onChange={(e) => setemailInput(e.target.value)}
-            name="email"
+            name="login"
           />
         </div>
         <div className="inputElement">

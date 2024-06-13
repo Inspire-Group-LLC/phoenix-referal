@@ -1,6 +1,6 @@
 import React from "react";
 import "./Registration.scss";
-import FormRegistration from "./FormRegistration.js";
+import FormRegistration from "./FormRegistration";
 import logo from '../../images/logo.svg';
 
 function Registration() {

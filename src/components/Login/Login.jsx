@@ -1,6 +1,6 @@
 import React from 'react';
 import './Login.scss';
-import FormLogin from "./FormLogin.js";
+import FormLogin from "./FormLogin";
 import logo from '../../images/logo.svg';
 
 function Login() {
