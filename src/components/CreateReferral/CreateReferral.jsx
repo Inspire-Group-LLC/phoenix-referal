@@ -1,18 +1,37 @@
-import React from "react";
-
-const options = [
-  { value: "formale", label: "Для Мужчин", id: 1 },
-  { value: "forfemale", label: "Для Женщин", id: 2 },
-  { value: "weightloss", label: "Для Похудения", id: 3 },
-];
-
-const options2 = [
-  { value: "uropro", label: "Uro Pro", id: 1 },
-  { value: "slimfit", label: "Slimfit", id: 2 },
-  { value: "doactive", label: "Do Active", id: 3 },
-];
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { APP_ROUTES } from "../../router/Route";
 
 export const CreateReferral = (props) => {
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(`${APP_ROUTES.URL}/category`);
+      setCategories(response.data);
+      console.log(response.data, "categories");
+    } catch (error) {
+      console.error("Не получилось загрузить категории!");
+    }
+  };
+
+  const getProducts = async () => {
+    try {
+      const response = await axios.get(`${APP_ROUTES.URL}/products`);
+      setProducts(response.data);
+      console.log(response.data, "products");
+    } catch (error) {
+      console.error("Не получилось загрузить продукты!");
+    }
+  };
+
+  useEffect(() => {
+    getCategories();
+    getProducts();
+  }, []);
+
   return (
     <div
       className={
@@ -36,11 +55,17 @@ export const CreateReferral = (props) => {
         <div className="createReferenceForm">
           <div className="formItem">
             <label htmlFor="refName">Выбор категории</label>
-            <select name="category" id="categorySelect">
-            <option hidden>Выберите Категорию</option>
-              {options.map((option) => (
-                <option key={option.value} value={option.id}>
-                  {option.label}
+            <select
+              name="category"
+              id="categorySelect"
+              onChange={(e) => {
+                setSelectedCategory(e.target.value);
+              }}
+            >
+              <option hidden>Выберите Категорию</option>
+              {categories.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.title}
                 </option>
               ))}
             </select>
@@ -58,11 +83,13 @@ export const CreateReferral = (props) => {
               }
             >
               <option hidden>Выберите Товар</option>
-              {options2.map((option) => (
-                <option key={option.value} value={option.id}>
-                  {option.label}
-                </option>
-              ))}
+              {products
+                .filter((option) => +option.category_id === +selectedCategory)
+                .map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.title}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="formItem">

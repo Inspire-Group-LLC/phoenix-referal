@@ -3,5 +3,5 @@ export const APP_ROUTES = {
   REGISTRATION: `/registration`,
   LOGIN: `/login`,
   MAIN: '/main',
-  URL: 'http://localhost:3002',
+  URL: 'https://euphoria-group.uz/api',
 };
