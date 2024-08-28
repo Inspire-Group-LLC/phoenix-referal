@@ -23,6 +23,30 @@ import { Monitoring } from "../Monitoring/Monitoring";
 import { CreateReferral } from "../CreateReferral/CreateReferral";
 import { ProfilePage } from "../ProfilePage/ProfilePage";
 import { ReferralContainer } from "../ReferralContainer/ReferralContainer";
+const maskPhoneNumber = (phoneNumber) => {
+  const startFour = phoneNumber.slice(0, 4);
+  const endFour = phoneNumber.slice(-5);
+  // Mask the rest of the number
+  const masked = startFour + "*".repeat(phoneNumber.length - 13) + endFour;
+  // Combine masked part and the last 4 digits
+  return `${masked}`;
+}
+const statusTranslate = (status) => {
+  switch (status) {
+    case "NEW":
+      return "Новый";
+    case "IN_PROGRESS":
+      return "В процессе";
+    case "DONE":
+      return "Выполнен";
+    case "REJECTED":
+      return "Отклонен";
+    case "TRASH":
+      return "Удален";
+    default:
+      return status;
+  }
+};
 
 function Main() {
   const [isOpenStatusBar, setIsOpenStatusBar] = useState(true);
@@ -186,6 +210,10 @@ function Main() {
         setReferralModal({
           title: item.title,
           url_link: item.url_link,
+          count: item._count.Orders,
+          new: item.Orders.filter((item) => item.status === "NEW" || item.status === "IN_PROGRESS").length,
+          done: item.Orders.filter((item) => item.status === "DONE").length,
+          rejected: item.Orders.filter((item) => item.status === "REJECTED" || item.status === "TRASH").length,
           created_at: parseCustomDateFormat(item.created_at),
         });
         setIsOpenReferralModal(true);
@@ -262,7 +290,7 @@ function Main() {
     <>
       <ToastContainer />
 
-      {!isOpenProfile && isOpenStatusBar && (
+{!profile.isVerified && (!isOpenProfile && isOpenStatusBar && (
         <div
           className="statusBar"
           style={{ backgroundColor: "#f1c40f", color: "black" }}
@@ -276,7 +304,8 @@ function Main() {
             onClick={() => setIsOpenStatusBar(false)}
           ></div>
         </div>
-      )}
+      ))}
+      
       <div className="MainPage" style={{ height: (isOpenProfile || !isOpenStatusBar) && "100%" }}>
         <div className="menuWrapper">
           <div className="menu">
@@ -292,14 +321,26 @@ function Main() {
               </div>
             </div>
             <div className="logoutWrapper">
-              <div className="menuItem profileIcon">
+              {
+                profile.isVerified ?      
+                <div className="menuItem profileIconVerified">
                 <img
                   src={profileIcon}
                   alt="profileIcon"
                   onClick={() => setIsOpenProfile(!isOpenProfile)}
                   // style={{ borderColor: "#FFD700", animation: "none" }}
                 />
+              </div> :               
+                <div className="menuItem profileIcon">
+                  <img
+                    src={profileIcon}
+                    alt="profileIcon"
+                    onClick={() => setIsOpenProfile(!isOpenProfile)}
+                    // style={{ borderColor: "#FFD700", animation: "none" }}
+                  />
               </div>
+              }
+             
               <div className="menuItem">
                 <img src={logout} alt="logout" onClick={logoutSystem} />
               </div>
@@ -372,10 +413,11 @@ function Main() {
               </div>
             </div>
             <div className="reference">
-              <div className="guides refItem">
+              <div className="guides refItem" >
                 <div className="refItemWrapper">
                   <h3>Гайды 5</h3>
-                  <img src={download} alt="download" />
+                  <a href="https://telegra.ph/Nastrojka-targeta-03-29"><img src={download} alt="download" />
+                  </a>
                 </div>
               </div>
               <div
@@ -395,7 +437,7 @@ function Main() {
             >
               <div className="bigRefItemWrapper">
                 <img src={eyeIcon} alt="eyeIcon" />
-                <h3>Мониторинг 16</h3>
+                <h3>Мониторинг  {profile.total_orders}</h3>
               </div>
             </div>
             <div
@@ -410,7 +452,7 @@ function Main() {
           </div>
           <div className="statisticsWrapper">
             {isOpenReferralModal ? (
-              <div className="openRefferralModal">
+              <div className="openRefferralModal stats">
                 <h3>{referralModal.title}</h3>
                 <div className="openRefferralModalInfo">
                   <p>Создано: {referralModal.created_at}</p>
@@ -420,8 +462,10 @@ function Main() {
                       {referralModal.url_link}
                     </a>
                   </p>
-                  <p>Оставленно заявок: 0</p>
-                  <p>Куплено: 0</p>
+                  <p>Оставленно заявок: {referralModal.count}</p>
+                  <p>Новых: {referralModal.new}</p>
+                  <p>Куплено: {referralModal.done}</p>
+                  <p>Отказано: {referralModal.rejected}</p>
                 </div>
                 <div
                   className="closeIcon"
@@ -429,7 +473,7 @@ function Main() {
                 ></div>
               </div>
             ) : (
-              <Statistics />
+              <Statistics rejected = {profile.REJECTED} done={profile.DONE} in_progress={profile.IN_PROGRESS} trash={profile.TRASH}/>
             )}
 
             <Slider />
@@ -465,6 +509,7 @@ function Main() {
                 <h2>Мониторинг</h2>
               </div>
               <div className="tableMonitoring">
+
                 <table>
                   <tbody>
                     <tr>
@@ -472,11 +517,18 @@ function Main() {
                       <td>Номер</td>
                       <td>Статус</td>
                     </tr>
-                    <tr>
-                      <td>Амиров Амир Амирович</td>
-                      <td>+998907775566</td>
-                      <td>Успешно</td>
+                    {
+                  profile.Orders && profile.Orders.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.name}  {item.surname}</td>
+                      <td>{maskPhoneNumber(item.phone)}</td>
+                      <td>{statusTranslate(item.status)}</td>
                     </tr>
+                    
+                    
+                  ))
+                }
+                    
                   </tbody>
                 </table>
               </div>

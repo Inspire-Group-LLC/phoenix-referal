@@ -9,14 +9,16 @@ function calculatePercentage(array) {
   return percentage;
 }
 
-const DonutChart = (props) => {
+const DonutChart = (
+  props
+) => {
   const data = {
     labels: [],
     datasets: [
       {
-        data: [+props.rejected, +props.in_progress, +props.done, +props.trash],
-        backgroundColor: ["#E60000", "#E87309", "#01d492", "#641e16"],
-        borderColor: ["#E60000", "#E87309", "#01d492", "#641e16"],
+        data: [2, 6, 5],
+        backgroundColor: ["#E60000", "#E87309", "#01d492"],
+        borderColor: ["#E60000", "#E87309", "#01d492"],
       },
     ],
   };

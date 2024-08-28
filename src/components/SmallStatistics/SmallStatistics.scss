@@ -32,8 +32,7 @@
 .stats-list {
   list-style: none;
   padding: 0;
-  padding-top: 21px;
-  margin: 0 35px 0 65px;
+  margin: 0 85px 0 0px;
 
   li {
     position: relative;
@@ -58,6 +57,9 @@
     margin-right: 10px;
   }
 
+  li:nth-child(1)::before {
+    background: #ffffff;
+  }
   li:nth-child(2)::before {
     background: #01d492;
   }
@@ -71,6 +73,11 @@
   }
 
   li:nth-child(5)::before {
-    background: #641e16;
+    background: #000000;
   }
+  li:nth-child(6)::before {
+    background: #007aff;
+  }
+
+
 }

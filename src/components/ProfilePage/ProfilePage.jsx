@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import passport1 from "../../images/passport1.jpg";
-import passport2 from "../../images/passport2.jpg";
 import { PDFrenderer } from "../PDFrenderer/PDFrenderer";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import { VerificationForm } from "./VerificationForm";
 
 export const ProfilePage = (props) => {
-  const [cardDate, setCardDate] = useState("");
-  const [legalFace, setLegalFace] = useState(false);
 
-  const inputCardDate = (e) => {
-    const newCardDate = e.length === 2 && cardDate.length === 1 ? e + "/" : e;
-    setCardDate(newCardDate);
-  };
 
-  const toggleLegalFace = (e) => {
-    setLegalFace(e.target.value === "1" ? true : false);
-  };
 
   return (
     <div
@@ -70,157 +60,38 @@ export const ProfilePage = (props) => {
             </div>
           </div>
         </div>
+
         <div className="statusInfoWrapper">
-          <div className="statusInfo">
-            <div className="statusInfoText textInfo">
-              Статус: <span style={{ color: "red" }}>не верифицирован</span>
-            </div>
-            <div className="recomendationText">
-              Для вывода средств вам требуется пройти верификацию
-            </div>
-            <button onClick={() => props.setIsOpenVerificationAccordion(true)}>
-              Пройти Верификацию
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="verificationForm">
-        <div
-          className={
-            props.isOpenVerificationAccordion
-              ? "verificationFormWrapper active"
-              : "verificationFormWrapper"
-          }
-        >
-          <div className="verificationAccordeonHeader">
-            <h2>Верификация</h2>
-            <div
-              className="toggleArrow"
-              onClick={() =>
-                props.setIsOpenVerificationAccordion(
-                  !props.isOpenVerificationAccordion
-                )
-              }
-            ></div>
-          </div>
-
-          <div className="verificationAccordionBody">
-            <div className="verificationAccordionWrapper">
-              <div className="formInputWrapper">
-                <label>Лицо</label>
-                <select onChange={(e) => toggleLegalFace(e)}>
-                  <option value="0">Физическое Лицо</option>
-                  <option value="1">Юридическое Лицо</option>
-                </select>
-
-                {legalFace ? (
-                  <>
-                    <label>Наименование организации</label>
-                    <input type="text" placeholder="ООО KOMAPNY" />
-
-                    <label>ИНН</label>
-                    <input type="text" placeholder="1234567890" />
-
-                    <label>Рег. код НДС (при наличии)</label>
-                    <input type="text" placeholder="1234567890" />
-
-                    <label>Адрес</label>
-                    <input type="text" placeholder="Улица, Дом, Квартира" />
-                  </>
-                ) : (
-                  <>
-                    <label>Серия и номер паспорта</label>
-                    <input type="text" placeholder="AA1234567" />
-
-                    <label>ПИНФЛ</label>
-                    <input type="text" placeholder="123456789012" />
-
-                    <label>Срок действия паспорта</label>
-                    <input type="date" />
-                    <i className="fa fa-calendar"></i>
-
-                    <label>Адрес по прописке</label>
-                    <input type="text" placeholder="Улица, Дом, Квартира" />
-                  </>
-                )}
-              </div>
-              <div className="formInputWrapper">
-                {legalFace ? (
-                  <>
-                    <label>Расчетный счет</label>
-                    <input type="text" placeholder="12345678901234567890" />
-
-                    <label>Название банка</label>
-                    <input type="text" placeholder="Название банка" />
-
-                    <label>МФО</label>
-                    <input type="text" placeholder="123456" />
-
-                    <label>Телефон</label>
-                    <input type="text" placeholder="+998 (__) ___ - __ - __" />
-                    <button className="verificationSubmit">
-                      Верифицироваться
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <label htmlFor="name">Полное ФИО</label>
-                    <input
-                      type="text"
-                      id="name"
-                      placeholder="Ваше Полное Имя"
-                    />
-
-                    <label>ИНН</label>
-                    <input type="text" placeholder="1234567890" />
-
-                    <label>Номер банковского счёта</label>
-                    <input type="text" placeholder="12345678901234567890" />
-
-                    <label>Номер пластиковой карты</label>
-                    <input type="text" placeholder="1234 5678 9012 3456" />
-
-                    <label>Действителен до</label>
-                    <input
-                      type="text"
-                      maxLength={5}
-                      placeholder="MM/YY"
-                      value={cardDate}
-                      onChange={(e) => inputCardDate(e.target.value)}
-                    />
-                  </>
-                )}
-              </div>
-              <div className="formInputWrapper">
-                {!legalFace && (
-                  <>
-                    <label>Примеры Фото</label>
-                    <div className="examplePassport">
-                      <img src={passport1} alt={passport1} />
-                      <img src={passport2} alt={passport2} />
+          
+            {
+              props.profile.isVerified ? (
+                <div className="statusInfoText textInfo">
+                  Верификация пройдена
+                </div>
+              ) : (
+                <div className="statusInfo">
+                  <div className="statusInfoText textInfo">
+                    Статус: <span style={{ color: 'red' }}> {'Не верифицирован'}</span>             
                     </div>
-
-                    <label>Загрузить фотографии</label>
-                    <input
-                      className="selectImageIconInput"
-                      type="file"
-                      id="file-input"
-                      placeholder="Загрузить фото"
-                      multiple
-                      accept="image/png, image/jpeg, image/jpg"
-                      onChange={(e) => props.handleFileInputChange(e)}
-                    />
-                    <button className="verificationSubmit">
-                      Верифицироваться
+                    <div className="recomendationText">
+                      Для вывода средств вам требуется пройти верификацию
+                    </div>
+                    <button onClick={() => props.setIsOpenVerificationAccordion(true)}>
+                      Пройти Верификацию
                     </button>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
+                  </div>
+              )
+            }
+            
         </div>
       </div>
-      <div className="withdrawal">
+
+      {
+        props.profile.isVerified ? 
+        null :
+        <VerificationForm {...props} />
+      }
+      {/* <div className="withdrawal">
         <div className="withdrawalDiv">
           <div className="withdrawalHeading">
             <h2>История вывода стредств</h2>
@@ -256,7 +127,7 @@ export const ProfilePage = (props) => {
             </table>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

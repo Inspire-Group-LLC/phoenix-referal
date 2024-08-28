@@ -149,7 +149,31 @@
             }
           }
         }
+        .menuItem.profileIconVerified {
+          margin-bottom: 30px;
 
+          img {
+            border: 5px #3c00ff solid;
+            border-radius: 50px;
+            width: 40px;
+            height: 40px;
+            animation: borderColorPulse 1s infinite linear;
+
+            @keyframes borderColorPulse {
+              0% {
+                filter: brightness(1);
+              }
+
+              50% {
+                filter: brightness(0.5);
+              }
+
+              100% {
+                filter: brightness(1);
+              }
+            }
+          }
+        }
         .menuItem {
           display: flex;
           justify-content: center;

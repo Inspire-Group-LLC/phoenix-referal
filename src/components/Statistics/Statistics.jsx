@@ -1,13 +1,13 @@
 import React from "react";
 import "./Statistics.scss";
 import DonutChart from "./DonutChart";
-const Statistics = () => {
+const Statistics = (props) => {
   return (
     <>
       <div className="stats">
         <div className="stats-body">
           <div className="donut-chart">
-            <DonutChart></DonutChart>
+            <DonutChart rejected={props.rejected} in_progress={props.in_progress} done={props.done} trash={props.trash}></DonutChart>
           </div>
 
           <ul className="stats-list">
@@ -15,6 +15,7 @@ const Statistics = () => {
             <li>Успешно</li>
             <li>В ожидании</li>
             <li>Отказ</li>
+            <li>Отменено</li>
           </ul>
         </div>
       </div>
