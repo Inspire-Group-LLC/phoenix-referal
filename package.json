@@ -2,6 +2,7 @@
   "name": "phoenix-referal",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/referral",
   "dependencies": {
     "@emotion/styled": "^11.11.5",
     "@mui/x-charts": "^7.1.1",
