@@ -35,6 +35,8 @@ const statusTranslate = (status) => {
   switch (status) {
     case "NEW":
       return "Новый";
+    case "PAID":
+      return "Оплачен";
     case "IN_PROGRESS":
       return "В процессе";
     case "DONE":
@@ -473,7 +475,7 @@ function Main() {
                 ></div>
               </div>
             ) : (
-              <Statistics rejected = {profile.REJECTED} done={profile.DONE} in_progress={profile.IN_PROGRESS} trash={profile.TRASH}/>
+              <Statistics rejected = {profile.REJECTED} done={profile.DONE} in_progress={profile.IN_PROGRESS} trash={profile.TRASH} paid={profile.PAID}/>
             )}
 
             <Slider />
