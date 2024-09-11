@@ -7,11 +7,12 @@ const Statistics = (props) => {
       <div className="stats">
         <div className="stats-body">
           <div className="donut-chart">
-            <DonutChart rejected={props.rejected} in_progress={props.in_progress} done={props.done} trash={props.trash}></DonutChart>
+            <DonutChart paid={props.paid}rejected={props.rejected} in_progress={props.in_progress} done={props.done} trash={props.trash}></DonutChart>
           </div>
 
           <ul className="stats-list">
             <h2>Статистика</h2>
+            <li>Оплачено</li>
             <li>Успешно</li>
             <li>В ожидании</li>
             <li>Отказ</li>

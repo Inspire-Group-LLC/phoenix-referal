@@ -14,9 +14,9 @@ const DonutChart = (props) => {
     labels: [],
     datasets: [
       {
-        data: [+props.rejected, +props.in_progress, +props.done, +props.trash],
-        backgroundColor: ["#E60000", "#E87309", "#01d492", "#641e16"],
-        borderColor: ["#E60000", "#E87309", "#01d492", "#641e16"],
+        data: [+props.paid,+props.rejected, +props.in_progress, +props.done, +props.trash],
+        backgroundColor: ["#0113d4","#E60000", "#E87309", "#01d492", "#641e16"],
+        borderColor: ["#0113d4","#E60000", "#E87309", "#01d492", "#641e16"],
       },
     ],
   };
