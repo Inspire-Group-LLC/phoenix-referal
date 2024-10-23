@@ -78,7 +78,7 @@ function FormRegistration() {
         }
       );
   
-      if (response.statusText === "Created") {
+      if (response.status === 201) {
         await finishRegistration();
       } 
     } catch (error) {
@@ -114,8 +114,10 @@ function FormRegistration() {
       }
     );
 
-    if (response.statusText === "Created") {
+    console.log(response);
+    if (response.status === 201) {
       setCheckPassword(true);
+      
     } else {
       toast.error("Ошибка отправки смс кода! Попробуйте позже!");
     }
