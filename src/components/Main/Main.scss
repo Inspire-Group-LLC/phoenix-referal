@@ -251,6 +251,10 @@
       overflow-y: auto;
       overflow-x: hidden;
 
+      .downloadPDF{
+        margin-bottom: 20px;
+      }
+
       // customize scrollbar
       &::-webkit-scrollbar {
         width: 0px;
@@ -1313,7 +1317,7 @@
       margin: 10px 0;
 
       .openRefferralModal {
-        padding: 24px;
+        padding: 20px;
         background-color: #181b3a;
         border-radius: 10px;
         margin-right: 10px;
@@ -1323,22 +1327,22 @@
         flex-direction: column;
         justify-content: flex-start;
         position: relative;
+        overflow-y: auto;
 
         h3 {
-          font-size: 22px;
+          font-size: 20px;
           font-family: "montserrat";
           color: white;
-          margin-bottom: 20px;
-          padding-bottom: 20px;
-          border-bottom: 1px solid white;
+          margin-bottom: 10px;
+          padding-bottom: 10px;
         }
 
         .openRefferralModalInfo {
           p {
-            font-size: 18px;
+            font-size: 16px;
             font-family: "montserrat";
             color: white;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
           }
 
           a {
@@ -1352,7 +1356,7 @@
 
         .closeIcon {
           position: absolute;
-          top: 22px;
+          top: 15px;
           right: 24px;
           cursor: pointer;
           width: 30px;

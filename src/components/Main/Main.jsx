@@ -308,7 +308,7 @@ function Main() {
         </div>
       ))}
       
-      <div className="MainPage" style={{ height: (isOpenProfile || !isOpenStatusBar) && "100%" }}>
+      <div className="MainPage" style={{ height: (profile.isVerified || (isOpenProfile && !isOpenStatusBar)) && "100%" }}>
         <div className="menuWrapper">
           <div className="menu">
             <div className="menuHeader">
